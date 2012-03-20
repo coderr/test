@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div style="float:left; border:1px solid grey; padding: 15px;">
+            {% block left_menu %}
+                <a href="{{ path('NotarNotarBunde_admin_homepage') }}">Notarii</a>
+                <br />
+            {% endblock %}
+        </div>
+        {% block body %}
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
