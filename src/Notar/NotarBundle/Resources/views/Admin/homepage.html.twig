@@ -1,4 +1,10 @@
 {% extends '::admin_base.html.twig' %}
 {% block body %}
-    
+<div style="margin-left: 100px;">
+    <form action="{{ path('NotarNotarBunde_admin_homepage') }}" method="post" {{ form_enctype(form) }}>
+          {{ form_widget(form) }}
+          
+          <input type="submit" />
+    </form>
+</div>
 {% endblock %}

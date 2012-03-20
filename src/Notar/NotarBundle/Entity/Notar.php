@@ -45,7 +45,7 @@ class Notar {
     /**
      * @ORM\Column(type="string", length="45")
      */
-    protected $work_schedule;
+    protected $working_schedule;
 
     /**
      * @ORM\Column(type="string", length="50")
@@ -161,8 +161,8 @@ class Notar {
      *
      * @param string $workSchedule
      */
-    public function setWorkSchedule($workSchedule) {
-        $this->work_schedule = $workSchedule;
+    public function setWorkingSchedule($workSchedule) {
+        $this->working_schedule = $workSchedule;
     }
 
     /**
@@ -170,8 +170,8 @@ class Notar {
      *
      * @return string 
      */
-    public function getWorkSchedule() {
-        return $this->work_schedule;
+    public function getWorkingSchedule() {
+        return $this->working_schedule;
     }
 
     /**
