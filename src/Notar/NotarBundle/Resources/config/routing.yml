@@ -1,0 +1,3 @@
+NotarNotarBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: NotarNotarBundle:Default:index }
