@@ -6,3 +6,7 @@ DocDocBundle_doc_categories:
     pattern:  /admin/doc-categories
     defaults: { _controller: DocDocBundle:DocCategory:index }
 
+DocDocBundle_doc:
+    pattern:  /admin/doc
+    defaults: { _controller: DocDocBundle:Doc:index }
+

@@ -1,0 +1,57 @@
+{% extends '::admin_base.html.twig' %}
+{% block body %}
+<div class="center_div">
+    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga document</a>
+    <div id="add_form" class="{% if not edit %}add_hidden{% endif %}">
+        <form action="{{ path('DocDocBundle_doc') }}" method="post" {{ form_enctype(form) }}>
+              {{ form_widget(form) }}
+              {% if edit %}
+                  <input type="hidden" name="doc_id" value="{{ edit }}">
+              {% endif %}
+              {{ form_rest(form) }}
+              <input type="submit" />
+        </form>
+    </div>
+    <div>
+        <table width="100%" cellpadding="0" cellspacing="0" border="1" class="items_table">
+            <tr>
+                <td>
+                    Categoria
+                </td>
+                <td>
+                    Limba
+                </td>
+                <td>
+                    Activa?
+                </td>
+                <td>
+                    Sortare
+                </td>
+                <td>
+                    Operatii
+                </td>
+            </tr>
+            {% for item in docs %}
+                <tr>
+                    <td>
+                        {{ item.doccategoryid }}
+                    </td>
+                    <td>
+                        {{ item.doclangsid }}
+                    </td>
+                    <td>
+                        {% if item.isactive %}Da{% else %}Nu{% endif %}
+                    </td>
+                    <td>
+                        {{ item.sorting }}
+                    </td>
+                    <td>
+                        <a href="?action=delete_doc&id={{ item.id }}">Sterge</a> |
+                        <a href="?action=edit_doc&id={{ item.id }}">Modifica</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
