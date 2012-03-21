@@ -1,3 +1,8 @@
 DocDocBundle_doc_langs:
     pattern:  /admin/doc-langs
     defaults: { _controller: DocDocBundle:DocLangs:index }
+
+DocDocBundle_doc_categories:
+    pattern:  /admin/doc-categories
+    defaults: { _controller: DocDocBundle:DocCategory:index }
+
