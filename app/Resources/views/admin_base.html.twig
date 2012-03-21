@@ -19,6 +19,21 @@
             {% block left_menu %}
                 <a href="{{ path('NotarNotarBunde_admin_homepage') }}">Notarii</a> 
                 <br />
+                <a href="{{ path('UserUserBunde_admin_homepage') }}">Utilizatori</a> 
+                <br />
+                <a href="javascript:;" onclick="$('#doc_submenu').toggle();">Documente</a> 
+                <div style="display:none;" id="doc_submenu">
+                    &nbsp;&nbsp;&nbsp;<a href="{{ path('UserUserBunde_admin_homepage') }}">Limbi documente</a> 
+                    <br />
+                    &nbsp;&nbsp;&nbsp;<a href="{{ path('UserUserBunde_admin_homepage') }}">Categorii documente</a> 
+                    <br />
+                    &nbsp;&nbsp;&nbsp;<a href="{{ path('UserUserBunde_admin_homepage') }}">Documente</a> 
+                    <br />
+                    &nbsp;&nbsp;&nbsp;<a href="{{ path('UserUserBunde_admin_homepage') }}">Documente utilizatori</a> 
+                    <br />
+                </div>
+                <br />
+                
             {% endblock %}
         </div>
         {% block body %}

@@ -1,5 +1,13 @@
+DocDocBundle:
+    resource: "@DocDocBundle/Resources/config/routing.yml"
+    prefix:   /
+
 NotarNotarBundle:
     resource: "@NotarNotarBundle/Resources/config/routing.yml"
+    prefix:   /
+
+UserUserBundle:
+    resource: "@UserUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 # Internal routing configuration to handle ESI
