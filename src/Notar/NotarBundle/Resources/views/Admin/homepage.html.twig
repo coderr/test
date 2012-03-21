@@ -1,10 +1,69 @@
 {% extends '::admin_base.html.twig' %}
 {% block body %}
 <div style="margin-left: 100px;">
-    <form action="{{ path('NotarNotarBunde_admin_homepage') }}" method="post" {{ form_enctype(form) }}>
-          {{ form_widget(form) }}
-          
-          <input type="submit" />
-    </form>
+    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga notar</a>
+    <div id="add_form" class="{% if not edit %}add_hidden{% endif %}">
+        <form action="{{ path('NotarNotarBunde_admin_homepage') }}" method="post" {{ form_enctype(form) }}>
+              {{ form_widget(form) }}
+              {% if edit %}
+                  <input type="hidden" name="notar_id" value="{{ edit }}">
+              {% endif %}
+              {{ form_rest(form) }}
+              <input type="submit" />
+        </form>
+    </div>
+    <div>
+        <table width="100%" cellpadding="0" cellspacing="0" border="1" class="items_table">
+            <tr>
+                <td>
+                    Nume
+                </td>
+                <td>
+                    Adresa
+                </td>
+                <td>
+                    Orarul de lucru
+                </td>
+                <td>
+                    Email
+                </td>
+                <td>
+                    Telefon
+                </td>
+                <td>
+                    Data adaugarii
+                </td>
+                <td>
+                    Operatii
+                </td>
+            </tr>
+            {% for item in notars %}
+                <tr>
+                    <td>
+                        {{ item.notarname }}
+                    </td>
+                    <td>
+                        {{ item.notaraddress }}
+                    </td>
+                    <td>
+                        {{ item.workingschedule }}
+                    </td>
+                    <td>
+                        {{ item.email }}
+                    </td>
+                    <td>
+                        {{ item.phone }}
+                    </td>
+                    <td>
+                        {{ item.added|date('Y-m-d') }}
+                    </td>
+                    <td>
+                        <a href="?action=delete_notar&id={{ item.id }}">Sterge</a> |
+                        <a href="?action=edit_notar&id={{ item.id }}">Modifica</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
 {% endblock %}

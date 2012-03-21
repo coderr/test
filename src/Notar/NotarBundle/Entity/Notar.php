@@ -5,8 +5,9 @@ namespace Notar\NotarBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Notar\NotarBundle\Repository\NotarRepository")
  * @ORM\Table(name="notar")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Notar {
 
@@ -56,6 +57,17 @@ class Notar {
      * @ORM\Column(type="string", length="10")
      */
     protected $phone;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $added;
+
+
+
+    public function __construct() {
+        $this->setAdded(new \DateTime());
+    }
 
     /**
      * Get id
@@ -208,6 +220,24 @@ class Notar {
      */
     public function getPhone() {
         return $this->phone;
+    }
+
+    /**
+     * Set added
+     *
+     * @param string $added
+     */
+    public function setAdded($added) {
+        $this->added = $added;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getAdded() {
+        return $this->added;
     }
 
 }
