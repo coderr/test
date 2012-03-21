@@ -1,0 +1,7 @@
+parameters:
+#    notar_notar.example.class: Notar\NotarBundle\Example
+
+services:
+#    notar_notar.example:
+#        class: %notar_notar.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
