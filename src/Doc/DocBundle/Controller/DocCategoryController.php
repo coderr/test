@@ -12,7 +12,7 @@ class DocCategoryController extends Controller {
     private function checkLogin() {
         $session = $this->getRequest()->getSession();
         if ($session->get('auth') !== 'in') {
-            return $this->redirect($this->generateUrl('UserUserBundle_login'));
+            return $this->redirect($this->generateUrl('NotarNotarBundle_login'));
         }
     }
 
