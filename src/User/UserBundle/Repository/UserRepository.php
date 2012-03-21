@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository {
     public function getUsers() {
         $q = $this->createQueryBuilder('u')
                         ->select('u')
-                        ->addOrderBy('y.added', 'DESC');
+                        ->addOrderBy('u.added', 'DESC');
         return $q->getQuery()->getResult();
     }
 

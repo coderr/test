@@ -1,14 +1,4 @@
-NotarNotarBundle_login:
-    pattern:  /admin
-    defaults: { _controller: NotarNotarBundle:Login:login }
-    
-NotarNotarBunde_admin_homepage:
-    pattern:  /admin/home
-    defaults: { _controller: NotarNotarBundle:Admin:index }
-
-
-NotarNotarBunde_admin_users:
+UserUserBunde_admin_homepage:
     pattern:  /admin/users
-    defaults: { _controller: NotarNotarBundle:Admin:users }
-
+    defaults: { _controller: UserUserBundle:Admin:index }
 

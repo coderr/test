@@ -1,6 +1,6 @@
 {% extends '::admin_base.html.twig' %}
 {% block body %}
-<div style="margin-left: 100px;">
+<div class="center_div">
     <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga notar</a>
     <div id="add_form" class="{% if not edit %}add_hidden{% endif %}">
         <form action="{{ path('NotarNotarBunde_admin_homepage') }}" method="post" {{ form_enctype(form) }}>

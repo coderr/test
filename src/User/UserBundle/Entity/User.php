@@ -39,7 +39,7 @@ class User {
     protected $phone;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     protected $added;
 
@@ -76,13 +76,13 @@ class User {
         return $this->name;
     }
 
-    /**
-     * Set notar_address
-     *
-     * @param string $notarAddress
-     */
+    
     public function setLName($l_name) {
         $this->l_name = $l_name;
+    }
+    
+    public function getLName() {
+        return $this->l_name;
     }
 
     /**
