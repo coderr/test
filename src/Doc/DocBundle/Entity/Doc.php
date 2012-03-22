@@ -20,13 +20,14 @@ class Doc {
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Doc\DocBundle\Entity\DocCategory", inversedBy="doc")
+     * @ORM\ManyToOne(targetEntity="Doc\DocBundle\Entity\DocCategory")
+     *
      */
     protected $doc_category_id;
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Doc\DocBundle\Entity\DocLangs", inversedBy="doc")
+     * @ORM\ManyToOne(targetEntity="Doc\DocBundle\Entity\DocLangs")
      */
     protected $doc_langs_id;
 

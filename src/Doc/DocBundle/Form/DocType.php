@@ -9,16 +9,18 @@ class DocType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder->add('doc_category_id', 'entity', array(
-            'class' => 'Doc\\DocBundle\\Entity\\DocCategory',
-            'multiple' => true,
-            'expanded' => true,
-            'required' => true,
-            'query_builder' => function(EntityRepository $er) use (new \Doc\DocBundle\Entity\DocCategory) {
-                return $er->createQueryBuilder('c');
-            }
+            'class' => 'Doc\DocBundle\Entity\DocCategory',
+            'property' => 'category_name_ro',
         ));
-//        $builder->add('doc_category_id', 'choice', array('type' => new DocCategoryType()));
-        $builder->add('doc_langs_id');
+
+        $builder->add('doc_langs_id', 'entity', array(
+            'class' => 'Doc\DocBundle\Entity\DocLangs',
+            'property' => 'lang_name',
+        ));
+
+//        $builder->add('doc_category_id');
+//        $builder->add('doc_langs_id');
+
         $builder->add('content', 'text');
         $builder->add('is_active', 'checkbox');
         $builder->add('sorting');

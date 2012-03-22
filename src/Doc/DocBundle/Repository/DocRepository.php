@@ -12,10 +12,12 @@ class DocRepository extends EntityRepository {
      * gets the list of langs
      */
     public function getDocs() {
-        $q = $this->createQueryBuilder('d')
-                ->select('d')
-        ;
-        return $q->getQuery()->getResult();
+//        $q = $this->createQueryBuilder('d')
+//                ->select('d')
+//                ->leftJoin('d.DocDocBundle:DocCategory', 'dc')
+//        ;
+        $q = $this->getEntityManager()->createQuery("SELECT d FROM DocDocBundle:Doc d JOIN DocDocBundle:DocCategory");
+        return $q->getResult();
     }
 
     public function setDocId($doc_id) {

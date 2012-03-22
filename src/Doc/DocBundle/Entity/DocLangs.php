@@ -17,7 +17,6 @@ class DocLangs {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
     /**
      * @ORM\Column(type="string", length="45")
      */
@@ -37,6 +36,10 @@ class DocLangs {
 
     public function getId() {
         return $this->id;
+    }
+
+    public function __toString() {
+        return (string)$this->getId();
     }
 
 }

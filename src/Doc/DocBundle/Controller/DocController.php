@@ -28,7 +28,19 @@ class DocController extends Controller {
             $doc = $em->getRepository('DocDocBundle:Doc')->setDocId($_POST['doc_id'])->getDoc();
         } else {
             $doc = new Doc();
+
         }
+
+//        $doc_category_obj = new \Doc\DocBundle\Entity\DocCategory();
+//        $doc_category_obj->setId(1);
+//
+//        $doc_langs_obj = new \Doc\DocBundle\Entity\DocLangs();
+//        $doc_langs_obj->setId(1);
+//
+//        $doc->setDocCategoryId($doc_category_obj);
+//        $doc->setDocLangsId($doc_langs_obj);
+//        $doc->setDocCategoryId($_POST['doc_category']['doc_category_id']);
+//        $doc->setDocLangsId($_POST['doc_category']['doc_langs_id']);
         $form = $this->createForm(new DocType(), $doc);
 
         $request = $this->getRequest();

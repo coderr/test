@@ -15,6 +15,7 @@ class DocCategory {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\OneToMany(targetEntity="Doc\DocBundle\Entity\Doc")
      */
     protected $id;
 
@@ -84,6 +85,10 @@ class DocCategory {
 
     public function getId() {
         return $this->id;
+    }
+
+    public function __toString() {
+        return (string)$this->getId();
     }
 
 }
