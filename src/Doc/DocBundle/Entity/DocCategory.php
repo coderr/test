@@ -16,6 +16,7 @@ class DocCategory {
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\OneToMany(targetEntity="Doc\DocBundle\Entity\Doc")
+     * @ORM\JoinColumn(name="id", referencedColumnName="doc_category_id")
      */
     protected $id;
 
@@ -28,7 +29,7 @@ class DocCategory {
      * @ORM\Column(type="string", length="150")
      */
     protected $category_name_ru;
-
+    
     /**
      * @ORM\Column(type="boolean")
      */

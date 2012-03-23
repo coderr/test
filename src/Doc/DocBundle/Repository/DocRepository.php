@@ -12,12 +12,28 @@ class DocRepository extends EntityRepository {
      * gets the list of langs
      */
     public function getDocs() {
-//        $q = $this->createQueryBuilder('d')
-//                ->select('d')
-//                ->leftJoin('d.DocDocBundle:DocCategory', 'dc')
-//        ;
-        $q = $this->getEntityManager()->createQuery("SELECT d FROM DocDocBundle:Doc d JOIN DocDocBundle:DocCategory");
-        return $q->getResult();
+        $q = $this->getEntityManager()->getConnection()
+                ->prepare('SELECT d.*, dc.category_name_ro FROM doc d, doc_category dc WHERE dc.id=d.doc_category_id GROUP BY dc.id');
+        $q->execute();
+
+        $return = $q->fetchAll(2);
+        $cnt = count($return);
+        for($i=0;$i<$cnt;$i++) {
+            $q = $this->getEntityManager()->getConnection()
+                    ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id IN (SELECT doc_langs_id FROM doc WHERE doc_category_id='.$return[$i]['doc_category_id'].')');
+            $q->execute();
+            $return[$i]['filled_langs'] = $q->fetchAll(2);
+            
+        }
+        for($i=0;$i<$cnt;$i++) {
+            $q = $this->getEntityManager()->getConnection()
+                    ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id NOT IN (SELECT doc_langs_id FROM doc WHERE doc_category_id='.$return[$i]['doc_category_id'].')');
+            $q->execute();
+            $return[$i]['not_filled_langs'] = $q->fetchAll(2);
+            
+        }
+        
+        return $return;
     }
 
     public function setDocId($doc_id) {

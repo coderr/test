@@ -19,7 +19,7 @@
                     Categoria
                 </td>
                 <td>
-                    Limba
+                    Limbi
                 </td>
                 <td>
                     Activa?
@@ -34,13 +34,15 @@
             {% for item in docs %}
                 <tr>
                     <td>
-                        {{ item.doccategoryid }}
+                        {{ item.category_name_ro }}
                     </td>
                     <td>
-                        {{ item.doclangsid }}
+                        {% for lang, key in item.filled_langs %}
+                            {{ key[lang] }}
+                        {% endfor %}
                     </td>
                     <td>
-                        {% if item.isactive %}Da{% else %}Nu{% endif %}
+                        {% if item.is_active %}Da{% else %}Nu{% endif %}
                     </td>
                     <td>
                         {{ item.sorting }}

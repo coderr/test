@@ -81,6 +81,8 @@ class DocController extends Controller {
 
         $docs = $em->getRepository('DocDocBundle:Doc')->getDocs();
 
+//        Debug::d1($docs);
+        
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
     }
 

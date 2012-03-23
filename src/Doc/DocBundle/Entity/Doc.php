@@ -20,8 +20,8 @@ class Doc {
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="Doc\DocBundle\Entity\DocCategory")
-     *
+     * @ORM\ManyToOne(targetEntity="DocCategory")
+     * @ORM\JoinColumn(name="doc_category_id", referencedColumnName="id")
      */
     protected $doc_category_id;
 
@@ -45,6 +45,7 @@ class Doc {
      * @ORM\Column(type="integer")
      */
     protected $sorting;
+    
 
     public function setDocCategoryId($category_id) {
         $this->doc_category_id = $category_id;
