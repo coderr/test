@@ -13,27 +13,33 @@ class DocRepository extends EntityRepository {
      */
     public function getDocs() {
         $q = $this->getEntityManager()->getConnection()
-                ->prepare('SELECT d.*, dc.category_name_ro FROM doc d, doc_category dc WHERE dc.id=d.doc_category_id GROUP BY dc.id');
+                ->prepare('SELECT d.*, d.doc_description_ro, d.doc_description_ru, dc.category_name_ro FROM doc d, doc_category dc WHERE dc.id=d.doc_category_id GROUP BY dc.id');
         $q->execute();
 
         $return = $q->fetchAll(2);
-        $cnt = count($return);
-        for($i=0;$i<$cnt;$i++) {
-            $q = $this->getEntityManager()->getConnection()
-                    ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id IN (SELECT doc_langs_id FROM doc WHERE doc_category_id='.$return[$i]['doc_category_id'].')');
-            $q->execute();
-            $return[$i]['filled_langs'] = $q->fetchAll(2);
-            
+        if ($this->with_languages) {
+            $cnt = count($return);
+            for ($i = 0; $i < $cnt; $i++) {
+                $query = "SELECT dl.*, d.id AS document_id FROM doc_langs dl, doc d, doc_category dc WHERE dl.id=d.doc_langs_id AND d.doc_category_id=dc.id AND dc.id=" . $return[$i]['doc_category_id'];
+                $q = $this->getEntityManager()->getConnection()
+                        ->prepare($query);
+                $q->execute();
+                $return[$i]['filled_langs'] = $q->fetchAll(2);
+            }
+            for ($i = 0; $i < $cnt; $i++) {
+                $q = $this->getEntityManager()->getConnection()
+                        ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id NOT IN (SELECT doc_langs_id FROM doc WHERE doc_category_id=' . $return[$i]['doc_category_id'] . ')');
+                $q->execute();
+                $return[$i]['not_filled_langs'] = $q->fetchAll(2);
+            }
         }
-        for($i=0;$i<$cnt;$i++) {
-            $q = $this->getEntityManager()->getConnection()
-                    ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id NOT IN (SELECT doc_langs_id FROM doc WHERE doc_category_id='.$return[$i]['doc_category_id'].')');
-            $q->execute();
-            $return[$i]['not_filled_langs'] = $q->fetchAll(2);
-            
-        }
-        
+
         return $return;
+    }
+
+    public function setWithLanguages($with_languages = true) {
+        $this->with_languages = $with_languages;
+        return $this;
     }
 
     public function setDocId($doc_id) {
@@ -41,6 +47,14 @@ class DocRepository extends EntityRepository {
             throw new \Exception('Document id must be an int', 0, 0);
         }
         $this->doc_id = $doc_id;
+        return $this;
+    }
+
+    public function setCategoryId($category_id) {
+        if (!$category_id) {
+            throw new \Exception('Category id must be an int', 0, 0);
+        }
+        $this->category_id = $category_id;
         return $this;
     }
 
@@ -61,6 +75,16 @@ class DocRepository extends EntityRepository {
                 ->setParameters(array('id' => $this->doc_id))
         ;
         return $q->getQuery()->getSingleResult();
+    }
+
+    public function deleteCategoryDocs() {
+        $q = $this->createQueryBuilder('d')
+                ->delete()
+                ->where('d.doc_category_id=:doc_category_id')
+                ->setParameters(array('doc_category_id' => $this->category_id))
+                ->getQuery()
+                ->execute()
+        ;
     }
 
 }

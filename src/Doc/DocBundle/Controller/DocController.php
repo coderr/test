@@ -60,11 +60,11 @@ class DocController extends Controller {
         }
         if ($this->get('request')->query->get('action')) {
             switch ($this->get('request')->query->get('action')) {
-                case 'delete_doc':
-                    $doc_id = (int) $this->get('request')->query->get('id');
-                    if ($doc_id) {
-                        $em->getRepository('DocDocBundle:Doc')->setDocId($doc_id)->deleteDoc();
-                        $this->get('session')->setFlash('notice', 'Documentul a fost STERS cu success');
+                case 'delete_docs':
+                    $cat_id = (int) $this->get('request')->query->get('id');
+                    if ($cat_id) {
+                        $em->getRepository('DocDocBundle:Doc')->setCategoryId($cat_id)->deleteCategoryDocs();
+                        $this->get('session')->setFlash('notice', 'Documentule au fost STERSE cu success');
                         return $this->redirect($this->generateUrl('DocDocBundle_doc'));
                     }
                     break;
@@ -72,6 +72,7 @@ class DocController extends Controller {
                     $doc_id = (int) $this->get('request')->query->get('id');
                     if ($doc_id) {
                         $doc = $em->getRepository('DocDocBundle:Doc')->setDocId($doc_id)->getDoc();
+//                        Debug::d1($doc);
                         $form = $this->createForm(new DocType(), $doc);
                         $edit = $doc_id;
                     }
@@ -79,9 +80,9 @@ class DocController extends Controller {
             }
         }
 
-        $docs = $em->getRepository('DocDocBundle:Doc')->getDocs();
+        $docs = $em->getRepository('DocDocBundle:Doc')->setWithLanguages()->getDocs();
 
-//        Debug::d1($docs);
+//        Debug::d($docs);
         
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
     }

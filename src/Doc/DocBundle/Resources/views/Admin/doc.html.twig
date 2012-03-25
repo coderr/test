@@ -2,7 +2,7 @@
 {% block body %}
 <div class="center_div">
     <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga document</a>
-    <div id="add_form" class="{% if not edit %}add_hidden{% endif %}">
+    <div id="add_form" class="{% if not edit and not app.request.query.get('category_id') %}add_hidden{% endif %}">
         <form action="{{ path('DocDocBundle_doc') }}" method="post" {{ form_enctype(form) }}>
               {{ form_widget(form) }}
               {% if edit %}
@@ -17,6 +17,9 @@
             <tr>
                 <td>
                     Categoria
+                </td>
+                <td>
+                    Nume document
                 </td>
                 <td>
                     Limbi
@@ -37,8 +40,17 @@
                         {{ item.category_name_ro }}
                     </td>
                     <td>
+                        {{ item.doc_name_ro }}
+                    </td>
+                    <td>
+                        <b>Completate</b><br />
                         {% for lang, key in item.filled_langs %}
-                            {{ key[lang] }}
+                            <a href="?action=edit_doc&id={{ key['document_id'] }}" title="Modifica documentul pentru aceasta limba">{{ key['lang_name'] }}</a>
+                        {% endfor %}
+                        <br />
+                        <b>NEcompletate</b><br />
+                        {% for lang, key in item.not_filled_langs %}
+                            <a href="?add_language={{ key['id'] }}&category_id={{ item.doc_category_id }}" title="Creaza document pentru aceasta limba">{{ key['lang_name'] }}</a>
                         {% endfor %}
                     </td>
                     <td>
@@ -48,8 +60,7 @@
                         {{ item.sorting }}
                     </td>
                     <td>
-                        <a href="?action=delete_doc&id={{ item.id }}">Sterge</a> |
-                        <a href="?action=edit_doc&id={{ item.id }}">Modifica</a>
+                        <a href="?action=delete_docs&id={{ item.doc_category_id }}" return="confirm('Se vor sterge toate ')">Sterge</a>
                     </td>
                 </tr>
             {% endfor %}

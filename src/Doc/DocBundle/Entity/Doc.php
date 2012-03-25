@@ -19,15 +19,14 @@ class Doc {
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="DocCategory")
-     * @ORM\JoinColumn(name="doc_category_id", referencedColumnName="id")
+     * ORM\ManyToOne(targetEntity="DocCategory")
+     * ORM\JoinColumn(name="doc_category_id", referencedColumnName="id")
      */
-    protected $doc_category_id;
+//    protected $doc_category_id;
 
     /**
-     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="Doc\DocBundle\Entity\DocLangs")
+     * @ORM\JoinColumn(name="doc_langs_id", referencedColumnName="id")
      */
     protected $doc_langs_id;
 
@@ -45,15 +44,35 @@ class Doc {
      * @ORM\Column(type="integer")
      */
     protected $sorting;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    protected $doc_name_ro;
+
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    protected $doc_name_ru;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $doc_description_ro;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $doc_description_ru;
     
 
-    public function setDocCategoryId($category_id) {
-        $this->doc_category_id = $category_id;
-    }
-
-    public function getDocCategoryId() {
-        return $this->doc_category_id;
-    }
+//    public function setDocCategoryId($category_id) {
+//        $this->doc_category_id = $category_id;
+//    }
+//
+//    public function getDocCategoryId() {
+//        return $this->doc_category_id;
+//    }
 
     public function setDocLangsId($lang_id) {
         $this->doc_langs_id = $lang_id;
@@ -93,6 +112,38 @@ class Doc {
 
     public function getId() {
         return $this->id;
+    }
+
+    public function setDocNameRo($doc_name_ro) {
+        $this->doc_name_ro = $doc_name_ro;
+    }
+    
+    public function getDocNameRo() {
+        return $this->doc_name_ro;
+    }
+
+    public function setDocNameRu($doc_name_ru) {
+        $this->doc_name_ru = $doc_name_ru;
+    }
+    
+    public function getDocNameRu() {
+        return $this->doc_name_ru;
+    }
+
+    public function setDocDescriptionRo($doc_description_ro) {
+        $this->doc_description_ro = $doc_description_ro;
+    }
+
+    public function getDocDescriptionRo() {
+        return $this->doc_description_ro;
+    }
+
+    public function setDocDescriptionRu($doc_description_ru) {
+        $this->doc_description_ru = $doc_description_ru;
+    }
+
+    public function getDocDescriptionRu() {
+        return $this->doc_description_ru;
     }
 
 }
