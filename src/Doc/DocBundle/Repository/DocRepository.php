@@ -12,15 +12,20 @@ class DocRepository extends EntityRepository {
      * gets the list of langs
      */
     public function getDocs() {
+        $query = '
+            SELECT d.*, d.doc_description_ro, d.doc_description_ru, dc.category_name_ro, dl.id AS doc_list_id
+            FROM doc_list dl, doc d, doc_category dc 
+            WHERE dl.id=d.doc_parent_id
+            GROUP BY dc.id';
         $q = $this->getEntityManager()->getConnection()
-                ->prepare('SELECT d.*, d.doc_description_ro, d.doc_description_ru, dc.category_name_ro FROM doc d, doc_category dc WHERE dc.id=d.doc_category_id GROUP BY dc.id');
+                ->prepare($query);
         $q->execute();
 
         $return = $q->fetchAll(2);
         if ($this->with_languages) {
             $cnt = count($return);
             for ($i = 0; $i < $cnt; $i++) {
-                $query = "SELECT dl.*, d.id AS document_id FROM doc_langs dl, doc d, doc_category dc WHERE dl.id=d.doc_langs_id AND d.doc_category_id=dc.id AND dc.id=" . $return[$i]['doc_category_id'];
+                $query = "SELECT dl.*, d.id AS document_id FROM doc_langs dl, doc d, doc_list list WHERE dl.id=d.doc_langs_id AND d.doc_parent_id=list.id AND list.id=" . $return[$i]['doc_list_id'];
                 $q = $this->getEntityManager()->getConnection()
                         ->prepare($query);
                 $q->execute();
@@ -28,7 +33,7 @@ class DocRepository extends EntityRepository {
             }
             for ($i = 0; $i < $cnt; $i++) {
                 $q = $this->getEntityManager()->getConnection()
-                        ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id NOT IN (SELECT doc_langs_id FROM doc WHERE doc_category_id=' . $return[$i]['doc_category_id'] . ')');
+                        ->prepare('SELECT dl.* FROM doc_langs dl WHERE dl.id NOT IN (SELECT doc_langs_id FROM doc WHERE doc_parent_id=' . $return[$i]['doc_list_id'] . ')');
                 $q->execute();
                 $return[$i]['not_filled_langs'] = $q->fetchAll(2);
             }

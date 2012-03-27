@@ -15,7 +15,9 @@ class DocCategory {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\OneToMany(targetEntity="Doc\DocBundle\Entity\Doc")
+     * ORM\OneToMany(targetEntity="Doc\DocBundle\Entity\Doc")
+     * ORM\JoinColumn(name="id", referencedColumnName="doc_category_id")
+     * @ORM\OneToMany(targetEntity="Doc\DocBundle\Entity\DocList")
      * @ORM\JoinColumn(name="id", referencedColumnName="doc_category_id")
      */
     protected $id;

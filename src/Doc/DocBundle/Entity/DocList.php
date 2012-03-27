@@ -25,16 +25,21 @@ class DocList {
     protected $doc_category_id;
     
     /**
+     * @ORM\Column(type="string", length="45")
+     */
+    protected $name;
+    
+    /**
      * @ORM\Column(type="integer")
      */
     protected $is_active;
 
     public function setDocCategoryId($category_id) {
-        $this->category_id = $category_id;
+        $this->doc_category_id = $category_id;
     }
 
     public function getDocCategoryId() {
-        return $this->category_id;
+        return $this->doc_category_id;
     }
 
     public function setIsActive($is_active) {
@@ -53,8 +58,15 @@ class DocList {
         return $this->id;
     }
 
+    public function getName() {
+        return $this->name;
+    }
+    
+    public function setName($name) {
+        $this->name = $name;
+    }
+    
     public function __toString() {
         return (string)$this->getId();
     }
-
 }

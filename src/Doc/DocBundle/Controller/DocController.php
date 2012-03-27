@@ -4,7 +4,9 @@ namespace Doc\DocBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doc\DocBundle\Entity\Doc;
+use Doc\DocBundle\Entity\DocList;
 use Doc\DocBundle\Form\DocType;
+use Doc\DocBundle\Form\DocListType;
 use Notar\NotarBundle\Additional\Debug;
 
 class DocController extends Controller {
@@ -20,28 +22,33 @@ class DocController extends Controller {
         if ($this->checkLogin()) {
             return $this->checkLogin();
         }
-
         $edit = false;
 
         $em = $this->getDoctrine()->getEntityManager();
+        
+        /**
+         * doc form (doc)
+         */
         if (@is_numeric($_POST['doc_id'])) {
             $doc = $em->getRepository('DocDocBundle:Doc')->setDocId($_POST['doc_id'])->getDoc();
+            $form = $this->createForm(new DocType(), $doc);
         } else {
             $doc = new Doc();
-
         }
-
-//        $doc_category_obj = new \Doc\DocBundle\Entity\DocCategory();
-//        $doc_category_obj->setId(1);
-//
-//        $doc_langs_obj = new \Doc\DocBundle\Entity\DocLangs();
-//        $doc_langs_obj->setId(1);
-//
-//        $doc->setDocCategoryId($doc_category_obj);
-//        $doc->setDocLangsId($doc_langs_obj);
-//        $doc->setDocCategoryId($_POST['doc_category']['doc_category_id']);
-//        $doc->setDocLangsId($_POST['doc_category']['doc_langs_id']);
-        $form = $this->createForm(new DocType(), $doc);
+        
+        /**
+         * doc parent form (doc_list) 
+         */
+        if (@is_numeric($_POST['parent_doc_id'])) {
+            $doc_list = $em->getRepository('DocDocBundle:DocList')->setDocListId($_POST['parent_doc_id'])->getDocList();
+            $form = $this->createForm(new DocListType(), $doc_list);
+        } else {
+            $doc_list = new DocList();
+            if(!isset($form)) {
+                $form = $this->createForm(new DocListType(), $doc_list);
+            }
+        }
+//Debug::d1($_POST);
 
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
@@ -80,9 +87,9 @@ class DocController extends Controller {
             }
         }
 
-        $docs = $em->getRepository('DocDocBundle:Doc')->setWithLanguages()->getDocs();
+        $docs = $em->getRepository('DocDocBundle:DocList')->setWithLanguages()->getDocs();
 
-//        Debug::d($docs);
+        Debug::d1($docs);
         
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
     }

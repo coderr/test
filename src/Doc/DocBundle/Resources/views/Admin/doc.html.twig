@@ -1,8 +1,9 @@
 {% extends '::admin_base.html.twig' %}
 {% block body %}
 <div class="center_div">
-    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga document</a>
+    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Creaza document</a>
     <div id="add_form" class="{% if not edit and not app.request.query.get('category_id') %}add_hidden{% endif %}">
+        
         <form action="{{ path('DocDocBundle_doc') }}" method="post" {{ form_enctype(form) }}>
               {{ form_widget(form) }}
               {% if edit %}
@@ -11,6 +12,7 @@
               {{ form_rest(form) }}
               <input type="submit" />
         </form>
+
     </div>
     <div>
         <table width="100%" cellpadding="0" cellspacing="0" border="1" class="items_table">
