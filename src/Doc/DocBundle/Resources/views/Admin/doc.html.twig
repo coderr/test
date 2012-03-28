@@ -42,7 +42,7 @@
                         {{ item.category_name_ro }}
                     </td>
                     <td>
-                        {{ item.doc_name_ro }}
+                        {{ item.name }}
                     </td>
                     <td>
                         <b>Completate</b><br />
@@ -52,7 +52,7 @@
                         <br />
                         <b>NEcompletate</b><br />
                         {% for lang, key in item.not_filled_langs %}
-                            <a href="?add_language={{ key['id'] }}&category_id={{ item.doc_category_id }}" title="Creaza document pentru aceasta limba">{{ key['lang_name'] }}</a>
+                            <a href="?add_language={{ key['id'] }}&doc_list_id={{ item.doc_list_id }}" title="Creaza document pentru aceasta limba">{{ key['lang_name'] }}</a>
                         {% endfor %}
                     </td>
                     <td>

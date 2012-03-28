@@ -13,9 +13,9 @@ class DocRepository extends EntityRepository {
      */
     public function getDocs() {
         $query = '
-            SELECT d.*, d.doc_description_ro, d.doc_description_ru, dc.category_name_ro, dl.id AS doc_list_id
-            FROM doc_list dl, doc d, doc_category dc 
-            WHERE dl.id=d.doc_parent_id
+            SELECT dc.category_name_ro, dl.*, dl.id AS doc_list_id
+            FROM doc_list dl, doc_category dc 
+            WHERE dl.doc_category_id=dc.id
             GROUP BY dc.id';
         $q = $this->getEntityManager()->getConnection()
                 ->prepare($query);

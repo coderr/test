@@ -32,8 +32,10 @@ class DocController extends Controller {
         if (@is_numeric($_POST['doc_id'])) {
             $doc = $em->getRepository('DocDocBundle:Doc')->setDocId($_POST['doc_id'])->getDoc();
             $form = $this->createForm(new DocType(), $doc);
-        } else {
+        } elseif(isset($_GET['doc_list_id']) && is_numeric($_GET['doc_list_id'])) {
             $doc = new Doc();
+            $form = $this->createForm(new DocType(), $doc);
+            $edit = true;
         }
         
         /**
@@ -87,9 +89,9 @@ class DocController extends Controller {
             }
         }
 
-        $docs = $em->getRepository('DocDocBundle:DocList')->setWithLanguages()->getDocs();
+        $docs = $em->getRepository('DocDocBundle:Doc')->setWithLanguages()->getDocs();
 
-        Debug::d1($docs);
+//        Debug::d1($docs);
         
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
     }
