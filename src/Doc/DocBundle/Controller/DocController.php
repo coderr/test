@@ -18,6 +18,40 @@ class DocController extends Controller {
         }
     }
 
+    public function processFormAction() {
+        if ($this->checkLogin()) {
+            return $this->checkLogin();
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+//        when creating/modifying doc_list
+        if(isset($_POST['doc_list'])) {
+            if(isset($_POST['modify_id']) && is_numeric($_POST['modify_id'])) {
+                $doc_list = $em->getRepository('DocDocBundle:DocList')->setDocListId($_POST['modify_id'])->getDocList();
+            } else {
+                $doc_list = new DocList();
+            }
+            $form = $this->createForm(new DocListType(), $doc_list);
+        } elseif(isset($_POST['doc'])) { // when creating/modifying doc
+            if(isset($_POST['modify_id']) && is_numeric($_POST['modify_id'])) {
+                $doc = $em->getRepository('DocDocBundle:Doc')->setDocId($_POST['modify_id'])->getDoc();
+            } else {
+                $doc = new Doc();
+            }
+            $form = $this->createForm(new DocType(), $doc);
+        }
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $em->merge($data);
+                $em->flush();
+                $this->get('session')->setFlash('notice', 'Documentul a fost CREAT cu success');
+                return $this->redirect($this->generateUrl('DocDocBundle_doc'));
+            }
+        }
+    }
+
     public function indexAction() {
         if ($this->checkLogin()) {
             return $this->checkLogin();
@@ -25,19 +59,18 @@ class DocController extends Controller {
         $edit = false;
 
         $em = $this->getDoctrine()->getEntityManager();
-        
         /**
          * doc form (doc)
          */
         if (@is_numeric($_POST['doc_id'])) {
             $doc = $em->getRepository('DocDocBundle:Doc')->setDocId($_POST['doc_id'])->getDoc();
             $form = $this->createForm(new DocType(), $doc);
-        } elseif(isset($_GET['doc_list_id']) && is_numeric($_GET['doc_list_id'])) {
+        } elseif (isset($_GET['doc_list_id']) && is_numeric($_GET['doc_list_id'])) {
             $doc = new Doc();
             $form = $this->createForm(new DocType(), $doc);
             $edit = true;
         }
-        
+
         /**
          * doc parent form (doc_list) 
          */
@@ -46,27 +79,11 @@ class DocController extends Controller {
             $form = $this->createForm(new DocListType(), $doc_list);
         } else {
             $doc_list = new DocList();
-            if(!isset($form)) {
+            if (!isset($form)) {
                 $form = $this->createForm(new DocListType(), $doc_list);
             }
         }
-//Debug::d1($_POST);
-
-        $request = $this->getRequest();
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-
-            if ($request->getMethod() == 'POST') {
-                $form->bindRequest($request);
-                if ($form->isValid()) {
-                    $data = $form->getData();
-                    $em->merge($data);
-                    $em->flush();
-                    $this->get('session')->setFlash('notice', 'Documentul a fost CREAT cu success');
-                    return $this->redirect($this->generateUrl('DocDocBundle_doc'));
-                }
-            }
-        }
+        
         if ($this->get('request')->query->get('action')) {
             switch ($this->get('request')->query->get('action')) {
                 case 'delete_docs':
@@ -92,7 +109,7 @@ class DocController extends Controller {
         $docs = $em->getRepository('DocDocBundle:Doc')->setWithLanguages()->getDocs();
 
 //        Debug::d1($docs);
-        
+
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
     }
 

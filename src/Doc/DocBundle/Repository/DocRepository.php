@@ -16,7 +16,7 @@ class DocRepository extends EntityRepository {
             SELECT dc.category_name_ro, dl.*, dl.id AS doc_list_id
             FROM doc_list dl, doc_category dc 
             WHERE dl.doc_category_id=dc.id
-            GROUP BY dc.id';
+            GROUP BY dl.id';
         $q = $this->getEntityManager()->getConnection()
                 ->prepare($query);
         $q->execute();

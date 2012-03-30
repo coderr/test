@@ -10,3 +10,7 @@ DocDocBundle_doc:
     pattern:  /admin/doc
     defaults: { _controller: DocDocBundle:Doc:index }
 
+DocDocBundle_doc_handle_forms:
+    pattern:  /admin/doc/handle_forms
+    defaults: { _controller: DocDocBundle:Doc:processForm }
+

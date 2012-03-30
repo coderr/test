@@ -15,6 +15,8 @@ class DocList {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * ORM\OneToMany(targetEntity="Doc\DocBundle\Entity\Doc")
+     * ORM\JoinColumn(name="id", referencedColumnName="doc_parent_id")
      */
     protected $id;
     
@@ -33,6 +35,11 @@ class DocList {
      * @ORM\Column(type="integer")
      */
     protected $is_active;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $sorting;
 
     public function setDocCategoryId($category_id) {
         $this->doc_category_id = $category_id;
@@ -64,6 +71,14 @@ class DocList {
     
     public function setName($name) {
         $this->name = $name;
+    }
+
+    public function getSorting() {
+        return $this->sorting;
+    }
+
+    public function setSorting($sorting) {
+        $this->sorting = $sorting;
     }
     
     public function __toString() {
