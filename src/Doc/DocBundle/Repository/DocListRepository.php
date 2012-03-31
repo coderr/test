@@ -53,4 +53,16 @@ class DocListRepository extends EntityRepository {
         ;
     }
 
+    public function deleteAllDocs() {
+        $query = 'DELETE FROM doc WHERE doc_parent_id='.$this->doc_list_id;
+        $q = $this->getEntityManager()->getConnection()
+                ->prepare($query);
+        $q->execute();
+        
+        $query = 'DELETE FROM doc_list WHERE id='.$this->doc_list_id;
+        $q = $this->getEntityManager()->getConnection()
+                ->prepare($query);
+        $q->execute();
+    }
+
 }
