@@ -60,7 +60,7 @@
                         {{ item.sorting }}
                     </td>
                     <td>
-                        <a href="?action=delete_docs&id={{ item.doc_category_id }}" return="confirm('Se vor sterge toate ')">Sterge</a>
+                        <a href="?action=delete_docs&id={{ item.doc_list_id }}" onclick="return confirm('Se vor sterge toate traducerile acestui document!\n Confirmati?')">Sterge</a>
                     </td>
                 </tr>
             {% endfor %}
