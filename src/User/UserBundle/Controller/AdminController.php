@@ -35,8 +35,6 @@ class AdminController extends Controller {
         }
 
         $request = $this->getRequest();
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
 
             if ($request->getMethod() == 'POST') {
                 $form->bindRequest($request);
@@ -48,7 +46,6 @@ class AdminController extends Controller {
                     return $this->redirect($this->generateUrl('UserUserBunde_admin_homepage'));
                 }
             }
-        }
         if ($this->get('request')->query->get('action')) {
             switch ($this->get('request')->query->get('action')) {
                 case 'delete_user':
