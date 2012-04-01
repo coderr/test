@@ -14,3 +14,6 @@ DocDocBundle_doc_handle_forms:
     pattern:  /admin/doc/handle_forms
     defaults: { _controller: DocDocBundle:Doc:processForm }
 
+DocDocBundle_doc_files:
+    pattern:  /admin/doc/doc-fields
+    defaults: { _controller: DocDocBundle:DocFields:index }

@@ -40,7 +40,7 @@
                         {{ item.category_name_ro }}
                     </td>
                     <td>
-                        {{ item.name }}
+                        {{ item.doc_name_ro }}
                     </td>
                     <td>
                         <b>Completate</b><br />
@@ -60,7 +60,9 @@
                         {{ item.sorting }}
                     </td>
                     <td>
-                        <a href="?action=delete_docs&id={{ item.doc_list_id }}" onclick="return confirm('Se vor sterge toate traducerile acestui document!\n Confirmati?')">Sterge</a>
+                        <a href="?action=delete_docs&id={{ item.doc_list_id }}" onclick="return confirm('Se vor sterge toate traducerile acestui document!\nConfirmati?')">Sterge</a>
+                        <br />
+                        <a href="{{ path('DocDocBundle_doc_files') }}?doc_list_id={{ item.doc_list_id }}">Cimpuri</a>
                     </td>
                 </tr>
             {% endfor %}

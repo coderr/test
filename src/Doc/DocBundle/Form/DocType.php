@@ -20,17 +20,14 @@ class DocType extends AbstractType {
 
         $doc_parent_id_arr = array(
             'class' => 'Doc\DocBundle\Entity\DocList',
-            'property' => 'name'
+            'property' => 'doc_name_ro'
         );
         if(isset($_GET['doc_list_id']) && is_numeric($_GET['doc_list_id'])) {
             $doc_parent_id_arr['preferred_choices'] = array($_GET['doc_list_id']);
         }
         $builder->add('doc_parent_id', 'entity', $doc_parent_id_arr);
         $builder->add('content', 'textarea');
-        $builder->add('doc_name_ro');
-        $builder->add('doc_name_ru');
-        $builder->add('doc_description_ro', 'textarea');
-        $builder->add('doc_description_ru', 'textarea');
+        
         $builder->add('is_active', 'checkbox');
         $builder->add('sorting');
     }

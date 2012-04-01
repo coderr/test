@@ -1,0 +1,91 @@
+{% extends '::admin_base.html.twig' %}
+{% block body %}
+<div class="center_div">
+    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga cimp</a>
+    <div id="add_form" class="{% if not edit %}add_hidden{% endif %}">
+        <form action="" method="post" {{ form_enctype(form) }}>
+              {{ form_widget(form) }}
+              {% if edit %}
+                  <input type="hidden" name="field_id" value="{{ edit }}">
+              {% endif %}
+              {{ form_rest(form) }}
+              <input type="submit" />
+        </form>
+    </div>
+    <br />
+    <br />
+    Documente: 
+    <select name="documents" onchange="document.location='{{ path('DocDocBundle_doc_files') }}?doc_list_id='+this.value">
+        {% for item in doc_lists %}
+            <option value="{{ item.id }}" {% if app.request.get('doc_list_id')==item.id %}selected="selected"{% endif %}>{{ item.name }}</option>
+        {% endfor %}
+    </select>
+    <br />
+    <br />
+    <div>
+        <table width="100%" cellpadding="0" cellspacing="0" border="1" class="items_table">
+            <tr>
+                <td>
+                    Document
+                </td>
+                <td>
+                    Denumirea ro
+                </td>
+                <td>
+                    Denumirea ru
+                </td>
+                <td>
+                    Descrierea ro
+                </td>
+                <td>
+                    Descrierea ru
+                </td>
+                <td>
+                    Ident
+                </td>
+                <td>
+                    Activa?
+                </td>
+                <td>
+                    Sortare
+                </td>
+                <td>
+                    Operatii
+                </td>
+            </tr>
+            {% for item in fields %}
+                <tr>
+                    <td>
+                        {{ item.doc_name }}
+                    </td>
+                    <td>
+                        {{ item.field_name_ro }}
+                    </td>
+                    <td>
+                        {{ item.field_name_ru }}
+                    </td>
+                    <td>
+                        {{ item.field_desc_ro }}
+                    </td>
+                    <td>
+                        {{ item.field_desc_ru }}
+                    </td>
+                    <td>
+                        {{ item.field_ident }}
+                    </td>
+                    <td>
+                        {% if item.is_active %}Da{% else %}Nu{% endif %}
+                    </td>
+                    <td>
+                        {{ item.sorting }}
+                    </td>
+                    <td>
+                        <a href="?action=delete_field&id={{ item.id }}">Sterge</a> |
+                        <a href="?action=edit_field&id={{ item.id }}">Modifica</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

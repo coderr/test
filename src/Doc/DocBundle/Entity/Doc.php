@@ -45,22 +45,6 @@ class Doc {
      * @ORM\JoinColumn(name="doc_parent_id", referencedColumnName="id")
      */
     protected $doc_parent_id;
-    /**
-     * @ORM\Column(type="string", length=200)
-     */
-    protected $doc_name_ro;
-    /**
-     * @ORM\Column(type="string", length=200)
-     */
-    protected $doc_name_ru;
-    /**
-     * @ORM\Column(type="text")
-     */
-    protected $doc_description_ro;
-    /**
-     * @ORM\Column(type="text")
-     */
-    protected $doc_description_ru;
 
     public function setDocLangsId($lang_id) {
         $this->doc_langs_id = $lang_id;
@@ -100,38 +84,6 @@ class Doc {
 
     public function getId() {
         return $this->id;
-    }
-
-    public function setDocNameRo($doc_name_ro) {
-        $this->doc_name_ro = $doc_name_ro;
-    }
-
-    public function getDocNameRo() {
-        return $this->doc_name_ro;
-    }
-
-    public function setDocNameRu($doc_name_ru) {
-        $this->doc_name_ru = $doc_name_ru;
-    }
-
-    public function getDocNameRu() {
-        return $this->doc_name_ru;
-    }
-
-    public function setDocDescriptionRo($doc_description_ro) {
-        $this->doc_description_ro = $doc_description_ro;
-    }
-
-    public function getDocDescriptionRo() {
-        return $this->doc_description_ro;
-    }
-
-    public function setDocDescriptionRu($doc_description_ru) {
-        $this->doc_description_ru = $doc_description_ru;
-    }
-
-    public function getDocDescriptionRu() {
-        return $this->doc_description_ru;
     }
 
     public function setDocParentId($doc_parent_id) {

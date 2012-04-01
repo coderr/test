@@ -19,18 +19,30 @@ class DocList {
      * ORM\JoinColumn(name="id", referencedColumnName="doc_parent_id")
      */
     protected $id;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="DocCategory")
      * @ORM\JoinColumn(name="doc_category_id", referencedColumnName="id")
      */
     protected $doc_category_id;
-    
+
     /**
-     * @ORM\Column(type="string", length="45")
+     * @ORM\Column(type="string", length=200)
      */
-    protected $name;
-    
+    protected $doc_name_ro;
+    /**
+     * @ORM\Column(type="string", length=200)
+     */
+    protected $doc_name_ru;
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $doc_description_ro;
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $doc_description_ru;
+
     /**
      * @ORM\Column(type="integer")
      */
@@ -65,14 +77,6 @@ class DocList {
         return $this->id;
     }
 
-    public function getName() {
-        return $this->name;
-    }
-    
-    public function setName($name) {
-        $this->name = $name;
-    }
-
     public function getSorting() {
         return $this->sorting;
     }
@@ -80,8 +84,41 @@ class DocList {
     public function setSorting($sorting) {
         $this->sorting = $sorting;
     }
-    
-    public function __toString() {
-        return (string)$this->getId();
+
+    public function setDocNameRo($doc_name_ro) {
+        $this->doc_name_ro = $doc_name_ro;
     }
+
+    public function getDocNameRo() {
+        return $this->doc_name_ro;
+    }
+
+    public function setDocNameRu($doc_name_ru) {
+        $this->doc_name_ru = $doc_name_ru;
+    }
+
+    public function getDocNameRu() {
+        return $this->doc_name_ru;
+    }
+
+    public function setDocDescriptionRo($doc_description_ro) {
+        $this->doc_description_ro = $doc_description_ro;
+    }
+
+    public function getDocDescriptionRo() {
+        return $this->doc_description_ro;
+    }
+
+    public function setDocDescriptionRu($doc_description_ru) {
+        $this->doc_description_ru = $doc_description_ru;
+    }
+
+    public function getDocDescriptionRu() {
+        return $this->doc_description_ru;
+    }
+
+    public function __toString() {
+        return (string) $this->getId();
+    }
+
 }

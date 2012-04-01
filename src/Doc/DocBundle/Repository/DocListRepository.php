@@ -33,6 +33,13 @@ class DocListRepository extends EntityRepository {
                 ->execute()
         ;
     }
+    
+    public function getDocLists() {
+        $q = $this->createQueryBuilder('d')
+                ->select('d')
+        ;
+        return $q->getQuery()->getResult();
+    }
 
     public function getDocList() {
         $q = $this->createQueryBuilder('d')

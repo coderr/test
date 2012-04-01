@@ -57,7 +57,6 @@ class DocController extends Controller {
             return $this->checkLogin();
         }
         $edit = false;
-
         $em = $this->getDoctrine()->getEntityManager();
         /**
          * doc form (doc)
@@ -83,13 +82,13 @@ class DocController extends Controller {
                 $form = $this->createForm(new DocListType(), $doc_list);
             }
         }
-        
+
         if ($this->get('request')->query->get('action')) {
             switch ($this->get('request')->query->get('action')) {
                 case 'delete_docs':
-                    $cat_id = (int) $this->get('request')->query->get('id');
-                    if ($cat_id) {
-                        $em->getRepository('DocDocBundle:Doc')->setCategoryId($cat_id)->deleteCategoryDocs();
+                    $doc_list_id = (int) $this->get('request')->query->get('id');
+                    if ($doc_list_id) {
+                        $em->getRepository('DocDocBundle:DocList')->setDocListId($doc_list_id)->deleteAllDocs();
                         $this->get('session')->setFlash('notice', 'Documentule au fost STERSE cu success');
                         return $this->redirect($this->generateUrl('DocDocBundle_doc'));
                     }
@@ -105,12 +104,15 @@ class DocController extends Controller {
                     break;
             }
         }
-
         $docs = $em->getRepository('DocDocBundle:Doc')->setWithLanguages()->getDocs();
 
 //        Debug::d1($docs);
 
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
+    }
+    
+    public function docFieldsAction() {
+        
     }
 
 }
