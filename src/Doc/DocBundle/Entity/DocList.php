@@ -44,7 +44,7 @@ class DocList {
     protected $doc_description_ru;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
     protected $is_active;
 
