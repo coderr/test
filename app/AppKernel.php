@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Notar\NotarBundle\NotarNotarBundle(),
             new User\UserBundle\UserUserBundle(),
             new Doc\DocBundle\DocDocBundle(),
+            new Front\FrontBundle\FrontFrontBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
