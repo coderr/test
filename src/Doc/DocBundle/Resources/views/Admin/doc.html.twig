@@ -62,6 +62,8 @@
                     <td>
                         <a href="?action=delete_docs&id={{ item.doc_list_id }}" onclick="return confirm('Se vor sterge toate traducerile acestui document!\nConfirmati?')">Sterge</a>
                         <br />
+                        <a href="?action=edit_doc_list&id={{ item.doc_list_id }}">Modifica</a>
+                        <br />
                         <a href="{{ path('DocDocBundle_doc_files') }}?doc_list_id={{ item.doc_list_id }}">Cimpuri</a>
                     </td>
                 </tr>
