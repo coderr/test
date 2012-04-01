@@ -1,3 +1,3 @@
-FrontFrontBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: FrontFrontBundle:Default:index }
+FrontFrontBundle_step1:
+    pattern:  /step1
+    defaults: { _controller: FrontFrontBundle:Doc:step1 }

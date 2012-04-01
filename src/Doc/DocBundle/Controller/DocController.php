@@ -102,6 +102,15 @@ class DocController extends Controller {
                         $edit = $doc_id;
                     }
                     break;
+                case 'edit_doc_list':
+                    $doc_list_id = (int) $this->get('request')->query->get('id');
+                    if ($doc_list_id) {
+                        $doc_list = $em->getRepository('DocDocBundle:DocList')->setDocListId($doc_list_id)->getDocList();
+//                        Debug::d1($doc_list);
+                        $form = $this->createForm(new DocListType(), $doc_list);
+                        $edit = $doc_list_id;
+                    }
+                    break;
             }
         }
         $docs = $em->getRepository('DocDocBundle:Doc')->setWithLanguages()->getDocs();
@@ -111,8 +120,4 @@ class DocController extends Controller {
         return $this->render('DocDocBundle:Admin:doc.html.twig', array('form' => $form->createView(), 'docs' => $docs, 'edit' => $edit));
     }
     
-    public function docFieldsAction() {
-        
-    }
-
 }

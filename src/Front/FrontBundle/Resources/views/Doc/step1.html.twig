@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <table>
+        <tr>
+            <td>
+                {% for item in docs %}
+                    <a href="javascript:;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
+                    <br />
+                {% endfor %}
+            </td>
+            <td>
+                {% for item in docs %}
+                <div class="hidden" id="category_{{ item.id }}">
+                    {% for doc in item.category_docs %}
+                        <a href="javascript:;" onclick="showDoc({{ doc.id }})">{{ doc.doc_name_ro }}</a>
+                        <br />
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </td>
+            <td>
+                {% for item in docs %}
+                    {% for doc in item.category_docs %}
+                        <div class="hidden_doc" id="doc_{{ doc.id }}">
+                            <span class="doc_name">{{ doc.doc_name_ro }}</span>
+                            <br />
+                            <span class="doc_desc">{{ doc.doc_description_ro }}</span>
+                            <br />
+                            <a href="javascript:;" onclick="addDocument({{ doc.id }})">Adauga</a>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <script>
+        function showCategory(category_id) {
+            $('.hidden').hide();
+            $('.hidden_doc').hide();
+            $('#category_'+category_id).show();
+        }
+        
+        function showDoc(doc_id) {
+            $('.hidden_doc').hide();
+            $('#doc_'+doc_id).show();
+        }
+        
+        function showDoc(addDocument) {
+            
+        }
+    </script>
+{% endblock %}
