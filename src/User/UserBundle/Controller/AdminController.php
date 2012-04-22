@@ -20,7 +20,7 @@ class AdminController extends Controller {
      * Notar
      */
     public function indexAction() {
-        if($_GET['logout'] == 1) {
+        if(@$_GET['logout'] == 1) {
             $session = $this->getRequest()->getSession();
             $session->set('auth', null);
         }
