@@ -43,7 +43,7 @@ class DocListRepository extends EntityRepository {
 
     public function getDocList() {
         $q = $this->createQueryBuilder('d')
-                ->select('d')
+                ->select('d.*')
                 ->where('d.id=:id')
                 ->setParameters(array('id' => $this->doc_list_id))
         ;
