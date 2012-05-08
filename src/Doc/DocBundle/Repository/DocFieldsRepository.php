@@ -18,7 +18,7 @@ class DocFieldsRepository extends EntityRepository {
             $and = ' AND df.doc_list_id='.$this->doc_list_id;
         }
         $query = '
-            SELECT df.*, dl.name AS doc_name 
+            SELECT df.*, dl.doc_name_ro AS doc_name 
             FROM doc_fields df LEFT JOIN doc_list dl ON dl.id=df.doc_list_id
             WHERE 1=1 '.$and.'
             ORDER BY df.sorting ASC
