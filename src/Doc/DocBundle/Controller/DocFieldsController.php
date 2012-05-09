@@ -22,7 +22,6 @@ class DocFieldsController extends Controller {
         }
 
         $edit = false;
-
         $em = $this->getDoctrine()->getEntityManager();
         if (@is_numeric($_POST['field_id'])) {
             $doc_field = $em->getRepository('DocDocBundle:DocFields')->setFieldId($_POST['field_id'])->getField();
@@ -73,7 +72,7 @@ class DocFieldsController extends Controller {
         $doc_lists = $em->getRepository('DocDocBundle:DocList')->getDocLists();
 //        Debug::d1($doc_lists);
 
-        return $this->render('DocDocBundle:Admin:doc_fields.html.twig', array('form' => $form->createView(), 'fields' => $fields->getFields(), 'edit' => $edit, 'doc_lists' => $doc_lists));
+        return $this->render('DocDocBundle:Admin:doc_fields.html.twig', array('form' => $form->createView(), 'fields' => $fields->getFields(), 'edit' => $edit, 'doc_listss' => $doc_lists));
     }
 
 }

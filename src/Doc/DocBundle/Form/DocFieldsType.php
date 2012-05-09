@@ -10,7 +10,7 @@ class DocFieldsType extends AbstractType {
     public function buildForm(FormBuilder $builder, array $options) {
         $doc_list_id_arr = array(
             'class' => 'Doc\DocBundle\Entity\DocList',
-            'property' => 'name',
+            'property' => 'doc_name_ro',
         );
         if(isset($_GET['doc_list_id']) && is_numeric($_GET['doc_list_id'])) {
             $doc_list_id_arr['preferred_choices'] = array($_GET['doc_list_id']);

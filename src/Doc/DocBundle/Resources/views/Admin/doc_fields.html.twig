@@ -9,17 +9,11 @@
                   <input type="hidden" name="field_id" value="{{ edit }}">
               {% endif %}
               {{ form_rest(form) }}
-              <input type="submit" />
+              <input type="submit" value="Salveaza" class="btn btn-primary"/>
         </form>
     </div>
     <br />
     <br />
-    Documente: 
-    <select name="documents" onchange="document.location='{{ path('DocDocBundle_doc_files') }}?doc_list_id='+this.value">
-        {% for item in doc_lists %}
-            <option value="{{ item.id }}" {% if app.request.get('doc_list_id')==item.id %}selected="selected"{% endif %}>{{ item.name }}</option>
-        {% endfor %}
-    </select>
     <br />
     <br />
     <div>
