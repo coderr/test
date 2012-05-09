@@ -68,7 +68,7 @@
                         {{ item.field_ident }}
                     </td>
                     <td>
-                        {% if item.is_active %}Da{% else %}Nu{% endif %}
+                        {% if item.is_active %}<span class="label label-success">Da</span>{% else %}<span class="label label-important">Nu</span>{% endif %}
                     </td>
                     <td>
                         {{ item.sorting }}
