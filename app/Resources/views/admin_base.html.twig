@@ -18,22 +18,33 @@
         {% endif %}
         <div style="float:left; border:1px solid grey; padding: 15px;">
             {% block left_menu %}
-                <a href="{{ path('NotarNotarBunde_admin_homepage') }}">Notarii</a> 
-                <br />
-                <a href="{{ path('UserUserBunde_admin_homepage') }}">Utilizatori</a> 
-                <br />
-                <a href="javascript:;" onclick="$('#doc_submenu').toggle();">Documente</a> 
-                <div style="display:none;" id="doc_submenu">
-                    &nbsp;&nbsp;&nbsp;<a href="{{ path('DocDocBundle_doc_langs') }}">Limbi documente</a> 
-                    <br />
-                    &nbsp;&nbsp;&nbsp;<a href="{{ path('DocDocBundle_doc_categories') }}">Categorii documente</a> 
-                    <br />
-                    &nbsp;&nbsp;&nbsp;<a href="{{ path('DocDocBundle_doc') }}">Documente</a> 
-                    <br />
-                </div>
-                <br />
-                <a href="{{ path('UserUserBunde_admin_homepage') }}?logout=1">Iesire</a> 
-                <br />
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="{{ path('NotarNotarBunde_admin_homepage') }}"><i class="icon-book"></i> Notarii</a> 
+                    </li>
+                    <li>
+                        <a href="{{ path('UserUserBunde_admin_homepage') }}"><i class="icon-user"></i> Utilizatori</a> 
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="$('#doc_submenu').toggle();"><i class="icon-file"></i> Documente</a> 
+                        <div style="display:none;" id="doc_submenu">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li style="padding-left:32px;">
+                                    <a style="margin:0" href="{{ path('DocDocBundle_doc_langs') }}">Limbi documente</a> 
+                                </li>
+                                <li style="padding-left:32px;">
+                                    <a style="margin:0" href="{{ path('DocDocBundle_doc_categories') }}">Categorii documente</a> 
+                                </li>
+                                <li style="padding-left:32px;">
+                                    <a style="margin:0" href="{{ path('DocDocBundle_doc') }}">Documente</a> 
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{{ path('UserUserBunde_admin_homepage') }}?logout=1"><i class="icon-off"></i> Iesire</a> 
+                    </li>
+                </ul>
             {% endblock %}
         </div>
         {% block body %}
