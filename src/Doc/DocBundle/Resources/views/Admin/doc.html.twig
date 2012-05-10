@@ -45,12 +45,12 @@
                     <td>
                         <b>Completate</b><br />
                         {% for lang, key in item.filled_langs %}
-                            <a href="?action=edit_doc&id={{ key['document_id'] }}" title="Modifica documentul pentru aceasta limba">{{ key['lang_name'] }}</a>
+                            <a class="label label-success" href="?action=edit_doc&id={{ key['document_id'] }}" title="Modifica documentul pentru aceasta limba">{{ key['lang_name'] }}</a>
                         {% endfor %}
                         <br />
                         <b>NEcompletate</b><br />
                         {% for lang, key in item.not_filled_langs %}
-                            <a href="?add_language={{ key['id'] }}&doc_list_id={{ item.doc_list_id }}" title="Creaza document pentru aceasta limba">{{ key['lang_name'] }}</a>
+                            <a class="label label-important" href="?add_language={{ key['id'] }}&doc_list_id={{ item.doc_list_id }}" title="Creaza document pentru aceasta limba">{{ key['lang_name'] }}</a>
                         {% endfor %}
                     </td>
                     <td>

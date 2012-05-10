@@ -16,39 +16,45 @@
                 {{ app.session.flash('notice') }}
             </div>
         {% endif %}
-        <div style="float:left; padding: 15px;" class="well">
-            {% block left_menu %}
-                <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="{{ path('NotarNotarBunde_admin_homepage') }}"><i class="icon-book"></i> Notarii</a> 
-                    </li>
-                    <li>
-                        <a href="{{ path('UserUserBunde_admin_homepage') }}"><i class="icon-user"></i> Utilizatori</a> 
-                    </li>
-                    <li>
-                        <a href="javascript:;" onclick="$('#doc_submenu').toggle();"><i class="icon-file"></i> Documente</a> 
-                        <div style="display:none;" id="doc_submenu">
+        <div class="fluid">
+                <div class="mini-layout-sidebar">
+                    <div style="float:left; padding: 15px; margin-right: 10px;" class="well">
+                        {% block left_menu %}
                             <ul class="nav nav-pills nav-stacked">
-                                <li style="padding-left:32px;">
-                                    <a style="margin:0" href="{{ path('DocDocBundle_doc_langs') }}">Limbi documente</a> 
+                                <li>
+                                    <a href="{{ path('NotarNotarBunde_admin_homepage') }}"><i class="icon-book"></i> Notari</a> 
                                 </li>
-                                <li style="padding-left:32px;">
-                                    <a style="margin:0" href="{{ path('DocDocBundle_doc_categories') }}">Categorii documente</a> 
+                                <li>
+                                    <a href="{{ path('UserUserBunde_admin_homepage') }}"><i class="icon-user"></i> Utilizatori</a> 
                                 </li>
-                                <li style="padding-left:32px;">
-                                    <a style="margin:0" href="{{ path('DocDocBundle_doc') }}">Documente</a> 
+                                <li>
+                                    <a href="javascript:;" onclick="$('#doc_submenu').toggle();"><i class="icon-file"></i> Documente</a> 
+                                    <div style="display:none;" id="doc_submenu">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li style="padding-left:32px;">
+                                                <a style="margin:0" href="{{ path('DocDocBundle_doc_langs') }}">Limbi documente</a> 
+                                            </li>
+                                            <li style="padding-left:32px;">
+                                                <a style="margin:0" href="{{ path('DocDocBundle_doc_categories') }}">Categorii documente</a> 
+                                            </li>
+                                            <li style="padding-left:32px;">
+                                                <a style="margin:0" href="{{ path('DocDocBundle_doc') }}">Documente</a> 
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="{{ path('UserUserBunde_admin_homepage') }}?logout=1"><i class="icon-off"></i> Iesire</a> 
                                 </li>
                             </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="{{ path('UserUserBunde_admin_homepage') }}?logout=1"><i class="icon-off"></i> Iesire</a> 
-                    </li>
-                </ul>
-            {% endblock %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="mini-layout-body">
+                    {% block body %}
+                    {% endblock %}
+                </div>
         </div>
-        {% block body %}
-        {% endblock %}
         {% block javascripts %}
             <script src="{{ asset('js/bootstrap.js') }}" type="text/javascript"></script>
         {% endblock %}

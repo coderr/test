@@ -1,3 +1,10 @@
+body{
+    padding:15px;
+}
+a{
+    outline: none;
+}
+
 .add_button{
     
 }
