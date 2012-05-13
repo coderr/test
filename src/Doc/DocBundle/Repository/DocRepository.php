@@ -92,4 +92,12 @@ class DocRepository extends EntityRepository {
         ;
     }
 
+    public function getDocWithDocList() {
+        $query = 'SELECT * FROM doc d, doc_list dl WHERE doc_parent_id=dl.id AND d.id=' . $this->doc_id;
+        $q = $this->getEntityManager()->getConnection()
+                ->prepare($query);
+        
+        return $q->fetchAll();
+    }
+
 }
