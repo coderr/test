@@ -1,17 +1,96 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="/css/style.css" type="text/css" />
         {% endblock %}
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <!--[if lte IE 8]>
+                <script type="text/javascript" src="js/html5.js"></script>
+        <![endif]-->
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <!-- header -->
+        <header>
+            <div class="centered">
+                <div class="languages">
+                    <a href="#" class="flag-md">MD</a>
+                    <a href="#" class="flag-ru">RU</a>
+                </div>
+                <!-- logo -->
+                <a href="#" class="logo">ENOTAR</a>
+                <!-- navigation menu of the site -->
+                <nav>
+                    <a href="#">Prima</a>
+                    <a href="#">Despre noi</a>
+                    <a href="#">Cum lucreaza</a>
+                    <a href="#" class="active">Comanda act</a>
+                    <a href="#">Contacte</a>
+                </nav>
+                <div class="header-buttons">
+                    <input type="button" class="rounded standard-btn" value="Logare" />
+                    <input type="button" class="rounded orange-btn" value="Inregistrare" />
+                </div>
+            </div>
+        </header>
+
+        <!-- content -->
+        <div class="centered">
+            {% block slider %}
+                <div class="steps-slider">
+                    <div class="steps-list">
+                        <span class="step-item active">1. Selectati Actele</span>
+                        <span class="step-item">2. Alegeti limba</span>
+                        <span class="step-item">3. Completati actul</span>
+                        <span class="step-item">4. Previzualizati actul</span>
+                        <span class="step-item">5. Confirmarea comenzii</span>
+                    </div>
+                    <div class="rounded slider-bar">
+                        <div class="rounded slidebar-active slide-bar-step-{% block slider_position %}3{% endblock %}">
+                            <div class="slide-bar-indicator">&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            <div class="rounded flash-info">
+                Selectati in stanga categoria de act, iar in sectiunea centrala actul ce trebuie tradus. Puteti sa selectati mai multe acte la aceasta etapa
+            </div>
+            {% block body %}{% endblock %}
+            <div class="rounded flash-info">
+                Daca n-ai gasit actul cautat, propune sa-l adaugam. <a href="#">Apasa aici</a>
+            </div>
+        </div>
+        <!-- footer -->
+        <footer>
+            <div class="footer-nav">
+                <div class="centered">
+                    <nav>
+                        <a href="#">Prima</a>
+                        <a href="#">Despre noi</a>
+                        <a href="#">Cum lucreaza</a>
+                        <a href="#" class="active">Comanda act</a>
+                        <a href="#">Contacte</a>
+                    </nav>
+
+                    <div class="follow-us">
+                        Urmeaza Enotar pe: 
+                        <a href="#" class="facebook">facebook</a>
+                        <a href="#" class="twitter">twitter</a>
+                        <a href="#" class="google">google</a>
+                    </div>
+                </div>
+            </div>
+            <div class="centered copyright">
+                Realizat de Monitoring Group
+                <span class="to-right">
+                    Copyright &copy; 2012 www.Enotar.com Toate Drepturile Rezervate
+                </span>
+            </div>
+        </footer>
         {% block javascripts %}{% endblock %}
     </body>
-</html>
-<!-- google analytics -->
+    
+</html> 
