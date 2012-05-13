@@ -9,7 +9,7 @@
               {% if app.request.query.get('id') %}
                   <input type="hidden" value="{{ app.request.query.get('id') }}" name="modify_id">
               {% endif %}
-              {% if form.vars.value.path %}
+              {% if form.vars.value.path is defined %}
                   <img src="/uploads/documents/{{ form.vars.value.path }}" width="100"/>
                   <br />
                   <br />
