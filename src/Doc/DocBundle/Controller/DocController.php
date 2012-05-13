@@ -11,6 +11,8 @@ use Notar\NotarBundle\Additional\Debug;
 
 class DocController extends Controller {
 
+    
+    
     private function checkLogin() {
         $session = $this->getRequest()->getSession();
         if ($session->get('auth') !== 'in') {
