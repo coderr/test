@@ -27,9 +27,11 @@ class DocType extends AbstractType {
         }
         $builder->add('doc_parent_id', 'entity', $doc_parent_id_arr);
         $builder->add('content', 'textarea');
+        $builder->add('price');
         
         $builder->add('is_active', 'checkbox', array('required' => false));
         $builder->add('sorting', 'text', array('required' => false));
+        $builder->add('file', 'file');
     }
 
     public function getName() {
