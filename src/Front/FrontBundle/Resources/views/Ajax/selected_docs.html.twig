@@ -1,0 +1,7 @@
+{% for array in docs %}
+    {% for item in array %}
+        <img src="/uploads/documents/{{ item.path }}" />
+        {{ item.docnamero }} - <a href="javascript:;" onclick="addRemoveDoc({{ item.id }}, 'remove')">Sterge</a>
+    {% endfor %}
+    <br />
+{% endfor %}
