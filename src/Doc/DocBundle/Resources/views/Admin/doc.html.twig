@@ -2,12 +2,17 @@
 {% block body %}
 <div class="center_div">
     <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Creaza document</a>
-    <div id="add_form" class="{% if not edit and not app.request.query.get('category_id') %}add_hidden{% endif %}">
+    <div id="add_form" class="{% if not edit and not app.request.query.get('category_id') %}add_hidden{% endif %}" {{ form_enctype(form) }}>
         <form action="{{ path('DocDocBundle_doc_handle_forms') }}" method="post" {{ form_enctype(form) }}>
               {{ form_widget(form) }}
               {{ form_rest(form) }}
               {% if app.request.query.get('id') %}
                   <input type="hidden" value="{{ app.request.query.get('id') }}" name="modify_id">
+              {% endif %}
+              {% if form.vars.value.path %}
+                  <img src="/uploads/documents/{{ form.vars.value.path }}" width="100"/>
+                  <br />
+                  <br />
               {% endif %}
               <input type="submit" value="Salveaza" class="btn btn-primary"/>
         </form>
