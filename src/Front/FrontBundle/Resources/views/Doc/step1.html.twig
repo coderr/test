@@ -1,14 +1,16 @@
 {% extends '::base.html.twig' %}
 {% block body %}
-    <table>
+    <table border="1">
         <tr>
             <td>
+                {# lista categoriilor #}
                 {% for item in docs %}
                     <a href="javascript:;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
                     <br />
                 {% endfor %}
             </td>
             <td>
+                {# lista documentelor pentru categorii #}
                 {% for item in docs %}
                 <div class="hidden" id="category_{{ item.id }}">
                     {% for doc in item.category_docs %}
