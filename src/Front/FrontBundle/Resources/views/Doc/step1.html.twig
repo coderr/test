@@ -1,11 +1,12 @@
 {% extends '::base.html.twig' %}
+{% block slider_position %}1{% endblock %}
 {% block body %}
-    <table border="1">
+    <table border="1" width="100%">
         <tr>
             <td>
                 {# lista categoriilor #}
                 {% for item in docs %}
-                    <a href="javascript:;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
+                    <a href="javascript:;" style="padding: 10px; display:block;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
                     <br />
                 {% endfor %}
             </td>
