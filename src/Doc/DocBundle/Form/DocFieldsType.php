@@ -23,8 +23,8 @@ class DocFieldsType extends AbstractType {
         $builder->add('field_desc_ro');
         $builder->add('field_desc_ru');
         $builder->add('field_ident');
-        $builder->add('is_active', 'checkbox');
-        $builder->add('sorting');
+        $builder->add('is_active', 'checkbox', array('required' => false));
+        $builder->add('sorting', 'text', array('required' => false));
     }
 
     public function getName() {
