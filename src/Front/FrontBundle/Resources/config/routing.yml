@@ -1,3 +1,7 @@
 FrontFrontBundle_step1:
     pattern:  /step1
     defaults: { _controller: FrontFrontBundle:Doc:step1 }
+    
+ajax:
+  pattern: /ajax
+  defaults: { _controller: FrontFrontBundle:Ajax:ajax }
