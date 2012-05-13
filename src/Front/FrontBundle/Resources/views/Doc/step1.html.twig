@@ -24,6 +24,7 @@
         </tr>
     </table>
     <div id="stored_docs"></div>
+    <a href="{{ path('FrontFrontBundle_step2') }}">Urmatorul pas</a>
     <script>
         function showCategory(category_id) {
             $('.hidden').hide();
@@ -41,5 +42,8 @@
                 }
             });
         }
+        $(document).ready(function(){
+            addRemoveDoc(0, 0);
+        });
     </script>
 {% endblock %}

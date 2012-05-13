@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+{% block slider_position %}2{% endblock %}
+{% block body %}
+
+    <img src="uploads/documents/{{ doc.path }}" />
+    Ati ales sa tracucesi {{ doc.docnamero }}, pretul pentru doc este {{ doc.price }}
+    <br />
+    Selectati limba spre traducere:
+    <br />
+    <form action="{{ path('FrontFrontBundle_step2') }}" method="post" id="lang_form">
+        <input type="hidden" name="session_array_id" value="{{ session_array_id }}">
+        {% for item in langs %}
+            <input type="radio" name="lang" value="{{ item.id }}"> {{ item.lang_name }}
+            <br />
+        {% endfor %}
+    </form>
+    <br />
+    <a href="javascript:;" onclick="$('#lang_form').submit();">Urmatorul pas</a>
+    <script>
+        
+    </script>
+{% endblock %}
