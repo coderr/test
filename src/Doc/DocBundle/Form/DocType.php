@@ -26,7 +26,7 @@ class DocType extends AbstractType {
             $doc_parent_id_arr['preferred_choices'] = array($_GET['doc_list_id']);
         }
         $builder->add('doc_parent_id', 'entity', $doc_parent_id_arr);
-        $builder->add('content', 'textarea');
+        $builder->add('content', 'textarea', array('required' => false));
         $builder->add('price');
         
         $builder->add('is_active', 'checkbox', array('required' => false));
