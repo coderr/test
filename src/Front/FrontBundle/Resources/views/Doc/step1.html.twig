@@ -10,7 +10,7 @@
             <div class="categories-list-items">
                 {# lista categoriilor #}
                 {% for item in docs %}
-                    <a href="javascript:;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
+                    <a href="javascript:;" onclick="showCategory({{ item.id }}, this)">{{ item.category_name_ro }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -18,7 +18,6 @@
             {% for item in docs %}
                 <span class="hidden" id="category_{{ item.id }}">
                     {% for doc in item.category_docs %}
-                        
                         <div class="document-item">
                             <div class="document-item-img-container">
                                 <img src="../images/doc1.jpg">
@@ -50,10 +49,12 @@
         </div>
     </div>
     <script>
-        function showCategory(category_id) {
+        function showCategory(category_id, obj) {
             $('.hidden').hide();
             $('.hidden_doc').hide();
             $('#category_'+category_id).show();
+            $('.categories-list-items a').removeClass('active');
+            $(obj).addClass('active');
         }
         function addRemoveDoc(doc_id, action) {
             $.ajax({
