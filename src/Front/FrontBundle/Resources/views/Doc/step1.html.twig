@@ -1,30 +1,54 @@
 {% extends '::base.html.twig' %}
 {% block slider_position %}1{% endblock %}
 {% block body %}
-    <table border="1" width="100%">
-        <tr>
-            <td>
+    <div class="rounded flash-info">
+        Selectati in stanga categoria de act, iar in sectiunea centrala actul ce trebuie tradus. Puteti sa selectati mai multe acte la aceasta etapa
+    </div>
+    <div class="documnets-by-category">
+        <div class="categories-list">
+            <div class="categories-title">Categorii de Acte</div>
+            <div class="categories-list-items">
                 {# lista categoriilor #}
                 {% for item in docs %}
-                    <a href="javascript:;" style="padding: 10px; display:block;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
-                    <br />
+                    <a href="javascript:;" onclick="showCategory({{ item.id }})">{{ item.category_name_ro }}</a>
                 {% endfor %}
-            </td>
-            <td>
-                {# lista documentelor pentru categorii #}
-                {% for item in docs %}
-                <div class="hidden" id="category_{{ item.id }}">
+            </div>
+        </div>
+        <div class="documents-items-list categories-docs-list">
+            {% for item in docs %}
+                <span class="hidden" id="category_{{ item.id }}">
                     {% for doc in item.category_docs %}
-                        {{ doc.doc_name_ro }} <a href="javascript:;" onclick="addRemoveDoc({{ doc.id }}, 'add')">Adauga</a>
-                        <br />
+                        
+                        <div class="document-item">
+                            <div class="document-item-img-container">
+                                <img src="../images/doc1.jpg">
+                            </div>
+                            <div class="document-item-name">{{ doc.doc_name_ro }}</div>
+                            <div class="to-center">
+                                <div class="div-btn standard-btn rounded">
+                                    <a href="javascript:;" class="button add-btn" onclick="addRemoveDoc({{ doc.id }}, 'add')">Adaugaţi</a>
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
-                </div>
-                {% endfor %}
-            </td>
-        </tr>
-    </table>
-    <div id="stored_docs"></div>
-    <a href="{{ path('FrontFrontBundle_step2') }}">Urmatorul pas</a>
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="rounded flash-info">
+        Daca n-ai gasit actul cautat, propune sa-l adaugam. <a href="#">Apasa aici</a>
+    </div>
+    <div id="stored_docs" class="documents-items-list border-separator">
+        
+    </div>
+    <div class="to-center top-separator">
+        <div class="div-btn standard-btn rounded">
+            <a href="" class="button prev-btn">Editeaza</a>
+        </div>
+        <div class="div-btn standard-btn rounded">
+            <a href="{{ path('FrontFrontBundle_step2') }}" class="button next-btn">Urmatorul pas</a>
+        </div>
+    </div>
     <script>
         function showCategory(category_id) {
             $('.hidden').hide();
