@@ -1,7 +1,11 @@
 {% for array in docs %}
     {% for item in array %}
-        <img src="/uploads/documents/{{ item.path }}" />
-        {{ item.docnamero }} - <a href="javascript:;" onclick="addRemoveDoc({{ item.id }}, 'remove')">Sterge</a>
+        <div class="document-item">
+            <a href="javascript:;" onclick="addRemoveDoc({{ item.id }}, 'remove')" class="remove-item-btn"></a>
+            <div class="document-item-img-container">
+                <img src="/uploads/documents/{{ item.path }}" />
+            </div>
+            <div class="document-item-name">{{ item.docnamero }}</div>
+        </div>
     {% endfor %}
-    <br />
 {% endfor %}
