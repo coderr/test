@@ -38,9 +38,6 @@ class DocController extends Controller {
             }
         }
         return $this->redirect($this->generateUrl('FrontFrontBundle_step3'));
-        echo '<pre>';
-        print_r($_SESSION['added_docs']);
-        die;
     }
 
     public function step3Action() {
