@@ -44,5 +44,16 @@ class DocLangsRepository extends EntityRepository {
         ;
         return $q->getQuery()->getSingleResult();
     }
+    
+    public function getDocAvailableLangs($doc_id) {
+        if(!is_numeric($doc_id)) {
+            return;
+        }
+        $query = "SELECT dl.id, dl.lang_name FROM doc_langs dl WHERE dl.id IN (SELECT doc_langs_id FROM doc WHERE doc_parent_id=".$doc_id.")";
+        $q = $this->getEntityManager()->getConnection()
+                ->prepare($query);
+        $q->execute();
+        return $q->fetchAll(2);
+    }
 
 }
