@@ -14,12 +14,15 @@
             <br />
             <br />
             <br />
-            {% for item in doc_fields %}
-                <fieldset>
-                    <label>{{ item.field_name_ro }}</label>
-                    <input type="text" name="fields[{{ item.id }}]" class="rounded">
-                </fieldset>
-            {% endfor %}
+            <form action="{{ path('FrontFrontBundle_step3') }}" method="post" id="fields_form">
+                <input type="hidden" name="session_array_id" value="{{ session_array_id }}">
+                {% for item in doc_fields %}
+                    <fieldset>
+                        <label>{{ item.field_name_ro }}</label>
+                        <input type="text" name="fields[{{ item.id }}]" class="rounded">
+                    </fieldset>
+                {% endfor %}
+            </form>
         </div>
     </div>
     <div class="to-center top-separator">
@@ -27,7 +30,7 @@
             <a href="" class="button prev-btn">Editeaza</a>
         </div>-->
         <div class="div-btn standard-btn rounded">
-            <a href="javascript:;" onclick="$('#lang_form').submit();" class="button next-btn">Urmatorul pas</a>
+            <a href="javascript:;" onclick="$('#fields_form').submit();" class="button next-btn">Urmatorul pas</a>
         </div>
     </div>
     <script>
