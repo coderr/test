@@ -29,6 +29,7 @@ class DocController extends Controller {
             if (!isset($_SESSION['added_docs'][$key]['to_lang'])) {
                 foreach ($_SESSION['added_docs'][$key] as $key1) {
                     $doc = $key1;
+                    break;
                 }
                 $em = $this->getDoctrine()->getEntityManager();
                 $available_langs = $em->getRepository('DocDocBundle:DocLangs')->getDocAvailableLangs($doc->getId()); // get available langs for this document
@@ -36,9 +37,31 @@ class DocController extends Controller {
                 return $this->render('FrontFrontBundle:Doc:step2.html.twig', array('doc' => $doc, 'langs' => $available_langs, 'session_array_id' => $key));
             }
         }
+        return $this->redirect($this->generateUrl('FrontFrontBundle_step3'));
         echo '<pre>';
         print_r($_SESSION['added_docs']);
         die;
+    }
+
+    public function step3Action() {
+        if (!isset($_SESSION['added_docs'])) {
+            $_SESSION['added_docs'] = array();
+        }
+        
+        foreach ($_SESSION['added_docs'] as $key => $value) {
+            Debug::d($key);
+            if (!isset($_SESSION['added_docs'][$key]['filled_fields'])) {
+                foreach ($_SESSION['added_docs'][$key] as $key1) {
+                    $doc = $key1;
+                    break;
+                }
+                $em = $this->getDoctrine()->getEntityManager();
+                $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available langs for this document
+                Debug::d1($doc_fields);
+
+                return $this->render('FrontFrontBundle:Doc:step2.html.twig', array('doc' => $doc, 'langs' => $available_langs, 'session_array_id' => $key));
+            }
+        }
     }
 
 }
