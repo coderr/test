@@ -1,6 +1,9 @@
 .hidden, .hidden_doc {
     display: none;
 }
+label{
+    cursor: pointer;
+}
 
 body
 {
