@@ -1,11 +1,13 @@
 {% for array in docs %}
     {% for item in array %}
-        <div class="document-item">
-            <a href="javascript:;" onclick="addRemoveDoc({{ item.id }}, 'remove')" class="remove-item-btn"></a>
-            <div class="document-item-img-container">
-                <img src="/uploads/documents/{{ item.path }}" />
+        {% if item.id is defined %}
+            <div class="document-item">
+                <a href="javascript:;" onclick="addRemoveDoc({{ item.id }}, 'remove')" class="remove-item-btn"></a>
+                <div class="document-item-img-container">
+                    <img src="/uploads/documents/{{ item.path }}" />
+                </div>
+                <div class="document-item-name">{{ item.docnamero }}</div>
             </div>
-            <div class="document-item-name">{{ item.docnamero }}</div>
-        </div>
+        {% endif %}
     {% endfor %}
 {% endfor %}
