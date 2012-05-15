@@ -1,22 +1,51 @@
 {% extends '::base.html.twig' %}
 {% block slider_position %}2{% endblock %}
 {% block body %}
-
-    <img src="uploads/documents/{{ doc.path }}" />
-    Ati ales sa tracucesi {{ doc.docnamero }}, pretul pentru doc este {{ doc.price }}
-    <br />
-    Selectati limba spre traducere:
-    <br />
-    <form action="{{ path('FrontFrontBundle_step2') }}" method="post" id="lang_form">
-        <input type="hidden" name="session_array_id" value="{{ session_array_id }}">
-        {% for item in langs %}
-            <input type="radio" name="lang" value="{{ item.id }}"> {{ item.lang_name }}
-            <br />
-        {% endfor %}
-    </form>
-    <br />
-    <a href="javascript:;" onclick="$('#lang_form').submit();">Urmatorul pas</a>
+    <div class="border-separator padding-sepataor">
+        <table class="ceneterd-element">
+            <tr>
+                <td>
+                    <img src="uploads/documents/{{ doc.path }}" />
+                </td>
+                <td class="two-cols-arrow-separator">
+                    <img src="../images/icon-arrow-gray-right.png">
+                </td>
+                <td>
+                    <div class="select-list">
+                        <div class="select-list-title rounded">Selectati limba spre traducere</div>
+                        <div class="select-list-items">
+                            <form action="{{ path('FrontFrontBundle_step2') }}" method="post" id="lang_form">
+                                <input type="hidden" name="session_array_id" value="{{ session_array_id }}">
+                                {% for item in langs %}
+                                    <div class="select-list-item">
+                                        <div class="item-flag-en"><input type="radio" name="lang" value="{{ item.id }}" id="lang_{{ item.id }}"> <label onclick="setLangActive(this);" for="lang_{{ item.id }}">{{ item.lang_name }}</label></div>
+                                    </div>
+                                {% endfor %}
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="rounded flash-info-green">
+            Ati ales sa traduceti {{ doc.docnamero }}, pretul pentru doc este <b>{{ doc.price }}</b>
+        </div>
+        <div class="to-center top-separator">
+<!--            <div class="div-btn standard-btn rounded">
+                <a href="" class="button prev-btn">Editeaza</a>
+            </div>-->
+            <div class="div-btn standard-btn rounded">
+                <a href="javascript:;" onclick="$('#lang_form').submit();" class="button next-btn">Urmatorul pas</a>
+            </div>
+        </div>
+    </div>
     <script>
-        
+        function setLangActive(obj) {
+            $('.select-list-items .select-list-item').removeClass('active');
+            $(obj).parent('div').parent('div').addClass('active');
+        }
+        $(document).ready(function(){
+            $('.steps-list .step-item ').eq(1).addClass('active')
+        });
     </script>
 {% endblock %}
