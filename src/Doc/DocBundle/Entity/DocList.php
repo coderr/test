@@ -64,6 +64,11 @@ class DocList {
      * @Assert\File(maxSize="6000000")
      */
     public $file;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $price;
     
     /**
      * @ORM\PrePersist()
@@ -191,6 +196,14 @@ class DocList {
 
     public function getPath() {
         return $this->path;
+    }
+    
+    public function setPrice($price) {
+        $this->price = $price;
+    }
+
+    public function getPrice() {
+        return $this->price;
     }
 
     public function __toString() {
