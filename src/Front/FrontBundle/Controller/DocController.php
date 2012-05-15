@@ -49,7 +49,6 @@ class DocController extends Controller {
         }
         
         foreach ($_SESSION['added_docs'] as $key => $value) {
-            Debug::d($key);
             if (!isset($_SESSION['added_docs'][$key]['filled_fields'])) {
                 foreach ($_SESSION['added_docs'][$key] as $key1) {
                     $doc = $key1;
@@ -57,9 +56,9 @@ class DocController extends Controller {
                 }
                 $em = $this->getDoctrine()->getEntityManager();
                 $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available langs for this document
-                Debug::d1($doc_fields);
+//                Debug::d1($doc_fields);
 
-                return $this->render('FrontFrontBundle:Doc:step2.html.twig', array('doc' => $doc, 'langs' => $available_langs, 'session_array_id' => $key));
+                return $this->render('FrontFrontBundle:Doc:step3.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $key));
             }
         }
     }
