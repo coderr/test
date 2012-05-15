@@ -41,6 +41,10 @@ class DocController extends Controller {
     }
 
     public function step3Action() {
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $_SESSION['added_docs'][$_POST['session_array_id']]['filled_fields'] = $_POST['fields'];
+        }
         if (!isset($_SESSION['added_docs'])) {
             $_SESSION['added_docs'] = array();
         }
