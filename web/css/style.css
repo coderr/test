@@ -16,6 +16,7 @@ a
 {
 	text-decoration: none;
 	color: #0064C2;
+        outline: none;
 }
 a:hover
 {
