@@ -4,7 +4,6 @@
 label{
     cursor: pointer;
 }
-
 body
 {
     background-color: #FFFFFF;
@@ -16,7 +15,7 @@ body
 a
 {
 	text-decoration: none;
-        outline: none;
+	color: #0064C2;
 }
 a:hover
 {
@@ -156,6 +155,10 @@ a.google
 .to-center
 {
 	text-align: center;
+}
+.text-to-center
+{
+	text-align: left;
 }
 .top-separator
 {
@@ -339,7 +342,10 @@ a.google
     background-position: 200px center;
     background-repeat: no-repeat;
 }
-
+.clear-all
+{
+	clear: both;
+}
 .centered
 {
 	width: 960px;
@@ -407,7 +413,8 @@ a.button
 }
 a.next-btn,
 a.prev-btn,
-a.add-btn
+a.add-btn,
+a.tick-btn
 {
     background-image: url("../images/icon-next.png");
     background-position: right center;
@@ -427,6 +434,10 @@ a.add-btn
 {
 	background-image: url("../images/icon-add.png");
 }
+a.tick-btn
+{
+	background-image: url("../images/icon-tick.png");
+}
 .flash-info,
 .flash-info-green
 {
@@ -444,6 +455,13 @@ a.add-btn
 .flash-info a
 {
 	color: #0064c2;
+}
+.flash-icon-info
+{
+    background-image: url("../images/icon-info.png");
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
 }
 .border-separator
 {
@@ -588,4 +606,103 @@ fieldset select
 {
     padding-right: 5px;
     width: 432px;
+}
+
+
+.preview-order
+{
+    margin: 0 auto;
+    width: 500px;
+}
+.preview-order h1
+{
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+}
+.preview-order .info-line
+{
+    border-top: 1px solid #E5E5E5;
+    color: #7F7F7F;
+    font-size: 16px;
+    padding: 15px 0;
+}
+.preview-order .info-line:last-child
+{
+	border-bottom: 1px solid #E5E5E5;
+}
+.preview-order .info-line .label
+{
+    color: #000000;
+    display: inline-block;
+    margin-right: 20px;
+    width: 150px;
+}
+.notars-list-s1
+{
+    float: left;
+    margin-bottom: 20px;
+}
+.notars-list-s1 .select-list-items
+{
+	height: 327px;
+}
+.notar-address-s1
+{
+    border: 1px solid #C5C5C5;
+    float: right;
+    padding: 20px 30px;
+    width: 560px;
+}
+.notar-address-s1 h1,
+.auth-forms .forms .login-form h1,
+.auth-forms .forms .register-form h1
+{
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 0;
+}
+.notar-address-s1 .notar-address b
+{
+    display: inline-block;
+    width: 100px;
+}
+.notar-address-s1 .gmap-address
+{
+	padding:5px;
+	border: 1px solid #E5E5E5;
+}
+
+.auth-forms .forms
+{
+    border: 1px solid #C5C5C5;
+    overflow: hidden;
+    padding: 30px 80px;
+    position: relative;
+}
+.auth-forms .forms .login-form
+{
+	float: left;
+}
+label.toggled
+{
+    color: #969696;
+    line-height: 32px;
+    padding-left: 10px;
+    position: absolute;
+    width: auto;
+}
+.auth-forms .forms .login-form input[type=text],
+.auth-forms .forms .login-form input[type=password],
+.auth-forms .forms .register-form input[type=text],
+.auth-forms .forms .register-form input[type=password]
+{
+	width: 280px;
+}
+.auth-forms .forms .register-form
+{
+    border-left: 1px solid #C5C5C5;
+    float: right;
+    padding-bottom: 20px;
+    padding-left: 90px;
 }
