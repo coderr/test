@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+{% block slider_position %}4{% endblock %}
+{% block body %}
+<div class="border-bottom-separator padding-sepataor">
+    <div class="preview-order">
+        <h1>{{ doc.docnamero }}</h1>
+        <form action="{{ path('FrontFrontBundle_step4') }}" method="post" id="fields_form">
+            <input type="hidden" name="session_array_id" value="{{ session_array_id }}">
+            {% for item in doc_fields %}
+            <div class="info-line">
+                <span class="label">{{ item.field_name_ro }}:</span>{{ filled_fields[item.id] }}
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    <div class="to-center top-separator">
+        <div class="div-btn standard-btn rounded">
+            <a href="{{ path('FrontFrontBundle_step3') }}?modify_id={{ session_array_id }}" class="button prev-btn">Editeaza</a>
+        </div>
+        <div class="div-btn standard-btn rounded">
+            <a href="javascript:;" onclick="$('#fields_form').submit();" class="button next-btn">Urmatorul pas</a>
+        </div>
+    </div>
+    <script>
+        function setLangActive(obj) {
+            $('.select-list-items .select-list-item').removeClass('active');
+            $(obj).parent('div').parent('div').addClass('active');
+        }
+        $(document).ready(function(){
+            $('.steps-list .step-item ').eq(3).addClass('active')
+        });
+    </script>
+    {% endblock %}
