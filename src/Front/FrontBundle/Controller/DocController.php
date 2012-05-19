@@ -24,7 +24,7 @@ class DocController extends Controller {
         if (!isset($_SESSION['added_docs'])) {
             $_SESSION['added_docs'] = array();
         }
-
+        
         foreach ($_SESSION['added_docs'] as $key => $value) {
             if (!isset($_SESSION['added_docs'][$key]['to_lang'])) {
                 foreach ($_SESSION['added_docs'][$key] as $key1) {
@@ -56,8 +56,7 @@ class DocController extends Controller {
                     break;
                 }
                 $em = $this->getDoctrine()->getEntityManager();
-                $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available langs for this document
-//                Debug::d1($doc_fields);
+                $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available fields for this document
 
                 return $this->render('FrontFrontBundle:Doc:step3.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $key));
             }
@@ -67,24 +66,28 @@ class DocController extends Controller {
     }
 
     public function step4Action() {
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $_SESSION['added_docs'][$_POST['session_array_id']]['checked_fields'] = 'yes';
+        }
         if (!isset($_SESSION['added_docs'])) {
             $_SESSION['added_docs'] = array();
         }
-
+        
         foreach ($_SESSION['added_docs'] as $key => $value) {
-            if (!isset($_SESSION['added_docs'][$key]['filled_fields'])) {
+            if (!isset($_SESSION['added_docs'][$key]['checked_fields'])) {
                 foreach ($_SESSION['added_docs'][$key] as $key1) {
                     $doc = $key1;
                     break;
                 }
                 $em = $this->getDoctrine()->getEntityManager();
-                $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available langs for this document
-
-                return $this->render('FrontFrontBundle:Doc:step3.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $key));
+                $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available fields for this document
+                
+                return $this->render('FrontFrontBundle:Doc:step4.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $key, 'filled_fields' => $value['filled_fields']));
             }
         }
 
-        return $this->redirect($this->generateUrl('FrontFrontBundle_step4'));
+        return $this->redirect($this->generateUrl('FrontFrontBundle_step5'));
     }
 
 }
