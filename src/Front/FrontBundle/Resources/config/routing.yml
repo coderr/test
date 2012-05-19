@@ -15,6 +15,10 @@ FrontFrontBundle_step4:
     pattern:  /step4
     defaults: { _controller: FrontFrontBundle:Doc:step4 }
     
+FrontFrontBundle_step5:
+    pattern:  /step5
+    defaults: { _controller: FrontFrontBundle:Doc:step5 }
+    
 ajax:
   pattern: /ajax
   defaults: { _controller: FrontFrontBundle:Ajax:ajax }
