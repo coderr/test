@@ -19,7 +19,7 @@
                 {% for item in doc_fields %}
                     <fieldset>
                         <label>{{ item.field_name_ro }}</label>
-                        <input type="text" name="fields[{{ item.id }}]" class="rounded">
+                        <input type="text" name="fields[{{ item.id }}]" class="rounded" value="{% if filled_fields is defined %}{{ filled_fields[item.id] }}{% endif %}">
                     </fieldset>
                 {% endfor %}
             </form>
