@@ -42,23 +42,34 @@ class DocController extends Controller {
 
     public function step3Action() {
         $request = $this->getRequest();
+        $em = $this->getDoctrine()->getEntityManager();
         if ($request->getMethod() == 'POST') {
             $_SESSION['added_docs'][$_POST['session_array_id']]['filled_fields'] = $_POST['fields'];
         }
         if (!isset($_SESSION['added_docs'])) {
             $_SESSION['added_docs'] = array();
         }
+        
+        $modify_id = $request->query->get('modify_id');
+        if(is_numeric($modify_id)) {
+            reset($_SESSION['added_docs'][$modify_id]);
+            $first_element_id = key($_SESSION['added_docs'][$modify_id]);
+            $doc = $_SESSION['added_docs'][$modify_id][$first_element_id];
+            $filled_fields = $_SESSION['added_docs'][$modify_id]['filled_fields'];
+            $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available fields for this document
+            
+            return $this->render('FrontFrontBundle:Doc:step3.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $modify_id, 'filled_fields' => $filled_fields));
+        } else {
+            foreach ($_SESSION['added_docs'] as $key => $value) {
+                if (!isset($_SESSION['added_docs'][$key]['filled_fields'])) {
+                    foreach ($_SESSION['added_docs'][$key] as $key1) {
+                        $doc = $key1;
+                        break;
+                    }
+                    $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available fields for this document
 
-        foreach ($_SESSION['added_docs'] as $key => $value) {
-            if (!isset($_SESSION['added_docs'][$key]['filled_fields'])) {
-                foreach ($_SESSION['added_docs'][$key] as $key1) {
-                    $doc = $key1;
-                    break;
+                    return $this->render('FrontFrontBundle:Doc:step3.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $key));
                 }
-                $em = $this->getDoctrine()->getEntityManager();
-                $doc_fields = $em->getRepository('DocDocBundle:DocFields')->setDocListId($doc->getId())->getFields(); // get available fields for this document
-
-                return $this->render('FrontFrontBundle:Doc:step3.html.twig', array('doc' => $doc, 'doc_fields' => $doc_fields, 'session_array_id' => $key));
             }
         }
 
