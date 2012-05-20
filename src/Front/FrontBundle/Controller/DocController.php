@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doc\DocBundle\Entity\DocCategory;
 use Notar\NotarBundle\Additional\Debug;
 use User\UserBundle\Entity\User;
+use Doc\DocBundle\Entity\UserDoc;
 
 class DocController extends Controller {
     
@@ -175,10 +176,19 @@ class DocController extends Controller {
     }
     
     public function myOrdersAction() {
-        Debug::d1($_SESSION['added_docs']);
         if ($this->checkLogin()) {
             return $this->checkLogin();
         }
+        $session = $this->getRequest()->getSession();
+        $em = $this->getDoctrine()->getEntityManager();
+        if(!empty($_SESSION['added_docs'])) {
+            foreach($_SESSION['added_docs'] as $key) {
+                $notars = $em->getRepository('DocDocBundle:UserDoc')->storeSessionUserDoc($key, $notar_id, $session->get('user_id'));
+            }
+            $user_doc = new UserDoc();
+            $user_doc->setUserId();
+        }
+        Debug::d1($_SESSION['added_docs']);
         
         return $this->render('FrontFrontBundle:Doc:my_orders.html.twig');
     }
