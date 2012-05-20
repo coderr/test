@@ -24,7 +24,7 @@ class DocListType extends AbstractType {
         $builder->add('is_active', 'checkbox', array('required' => false));
         $builder->add('sorting', 'text', array('required' => false));
         $builder->add('price', 'text', array('required' => false));
-        $builder->add('file', 'file');
+        $builder->add('file');
     }
 
     public function getName() {
