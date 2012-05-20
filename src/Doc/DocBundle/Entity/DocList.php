@@ -5,11 +5,12 @@ namespace Doc\DocBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doc\DocBundle\Extra\SimpleImage;
 
 /**
  * @ORM\Entity(repositoryClass="Doc\DocBundle\Repository\DocListRepository")
  * @ORM\Table(name="doc_list")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\HasLifecycleCallbacks
  */
 class DocList {
 
@@ -32,14 +33,17 @@ class DocList {
      * @ORM\Column(type="string", length=200)
      */
     protected $doc_name_ro;
+
     /**
      * @ORM\Column(type="string", length=200)
      */
     protected $doc_name_ru;
+
     /**
      * @ORM\Column(type="text")
      */
     protected $doc_description_ro;
+
     /**
      * @ORM\Column(type="text")
      */
@@ -54,12 +58,12 @@ class DocList {
      * @ORM\Column(type="integer")
      */
     protected $sorting;
-    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     public $path;
-    
+
     /**
      * @Assert\File(maxSize="6000000")
      */
@@ -69,34 +73,28 @@ class DocList {
      * @ORM\Column(type="integer")
      */
     protected $price;
-    
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload() {
-        if (null !== $this->file) {
-            // do whatever you want to generate a unique name
-            $this->path = uniqid() . '.' . $this->file->guessExtension();
-        }
-    }
 
     /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
+     * @ORM\prePersist()
+     * @ORM\preUpdate()
      */
     public function upload() {
-//        var_dump($this->path);die;
-        if (null === $this->file) {
+        if (0 !== $_FILES['doc_list']['error']['file']) {
             return;
         }
+        $file_name = $_FILES['doc_list']['name']['file'];
+        $explode = explode('.', $file_name);
+        $extension = $explode[count($explode)-1];
+        $this->path = uniqid() . '.' . $extension;
 
-        // if there is an error when moving the file, an exception will
-        // be automatically thrown by move(). This will properly prevent
-        // the entity from being persisted to the database on error
-        $this->file->move($this->getUploadRootDir(), $this->path);
-
-        unset($this->file);
+        if(move_uploaded_file($_FILES['doc_list']['tmp_name']['file'], $this->getUploadRootDir().'/'.$this->path)) {
+            $image = new SimpleImage();
+            $image->load($this->getUploadRootDir().'/'.$this->path);
+            $image->resizeToWidth(79, 107, false, 1);
+            $image->save($this->getUploadRootDir().'/th_'.$this->path);
+        } else {
+            die('error uploading file');
+        }
     }
 
     /**
@@ -189,7 +187,7 @@ class DocList {
     public function getDocDescriptionRu() {
         return $this->doc_description_ru;
     }
-    
+
     public function setPath($path) {
         $this->path = $path;
     }
@@ -197,13 +195,21 @@ class DocList {
     public function getPath() {
         return $this->path;
     }
-    
+
     public function setPrice($price) {
         $this->price = $price;
     }
 
     public function getPrice() {
         return $this->price;
+    }
+
+    public function setFile($file) {
+        $this->file = $file;
+    }
+    
+    public function getFile() {
+        return $this->file;
     }
 
     public function __toString() {
