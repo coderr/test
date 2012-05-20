@@ -8,6 +8,13 @@ use Notar\NotarBundle\Additional\Debug;
 use User\UserBundle\Entity\User;
 
 class DocController extends Controller {
+    
+    private function checkLogin() {
+        $session = $this->getRequest()->getSession();
+        if ($session->get('auth') !== 'in') {
+            return $this->redirect($this->generateUrl('FrontFrontBundle_login_register'));
+        }
+    }
 
     public function step1Action() {
         $em = $this->getDoctrine()->getEntityManager();
@@ -160,6 +167,17 @@ class DocController extends Controller {
         $em->persist($user);
         $em->flush();
         
+        $session = $this->getRequest()->getSession();
+        $session->set('auth', 'in');
+        $session->set('user_id', $user->getId());
+        
+        return $this->redirect($this->generateUrl('FrontFrontBundle_my_orders'));
+    }
+    
+    public function myOrdersActions() {
+        if ($this->checkLogin()) {
+            return $this->checkLogin();
+        }
         return $this->render('FrontFrontBundle:Doc:my_orders.html.twig');
     }
 
