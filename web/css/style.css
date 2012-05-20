@@ -1,5 +1,5 @@
 .hidden, .hidden_doc {
-    display: none;
+    display: none !important;
 }
 label{
     cursor: pointer;
