@@ -26,8 +26,15 @@ class AjaxController extends Controller {
                 }
             }
         }
-//        print_r($_SESSION['added_docs']);die;
         return $this->render('FrontFrontBundle:Ajax:selected_docs.html.twig', array('docs' => $_SESSION['added_docs']));
+    }
+    
+    public function ajaxNotarAction() {
+        $notar_id = $_GET['notar_id'];
+        if(is_numeric($notar_id)) {
+            $notar_details = $this->getDoctrine()->getRepository('NotarNotarBundle:Notar')->setNotarId($notar_id)->getNotar();
+            return $this->render('FrontFrontBundle:Ajax:notar_details.html.twig', array('notar' => $notar_details));
+        }
     }
 
 }
