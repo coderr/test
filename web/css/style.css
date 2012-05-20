@@ -1,5 +1,5 @@
 .hidden, .hidden_doc {
-    display: none !important;
+    display: none;
 }
 label{
     cursor: pointer;
@@ -548,6 +548,7 @@ a.tick-btn
     border-bottom: 1px solid #C5C5C5;
     font-size: 13px;
     padding: 12px 20px;
+    cursor: pointer;
 }
 .select-list .select-list-items .select-list-item:last-child
 {
@@ -725,4 +726,12 @@ label.toggled
 .settings-form .ceneterd-element
 {
 	width: 560px;
+}
+.my_orders td{
+    border-top:1px solid #D2D2D2;
+    border-bottom:1px solid #D2D2D2;
+}
+.my_orders th{
+    border-top:1px solid #D2D2D2;
+    padding: 12px;
 }
