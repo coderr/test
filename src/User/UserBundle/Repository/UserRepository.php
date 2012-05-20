@@ -45,4 +45,13 @@ class UserRepository extends EntityRepository {
         return $q->getQuery()->getSingleResult();
     }
 
+    public function checkEmail($email) {
+        $q = $this->createQueryBuilder('u')
+                        ->select('COUNT(u.id) AS cnt')
+                        ->where('u.email=:email')
+                        ->setParameters(array('email' => $email))
+        ;
+        return $q->getQuery()->getSingleResult();
+    }
+
 }
