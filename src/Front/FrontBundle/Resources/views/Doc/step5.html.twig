@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+{% block slider_position %}5{% endblock %}
+{% block body %}
+<div class="border-bottom-separator padding-sepataor">
+    <div class="select-list notars-list-s1">
+        <div class="select-list-title rounded">Alegeti notarul pentru ridicarea actului</div>
+        <div class="select-list-items">
+            {% for item in notars %}
+                <div class="select-list-item" onclick="getNotar({{ item.id }}, this)">
+                    {{ item.notarname }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <span id="notar_details"></span>
+    <script>
+        function getNotar(notar_id, obj) {
+            $('.select-list-items .select-list-item').removeClass('active');
+            $(obj).addClass('active');
+            $.ajax({
+                url: "{{ path('ajax_notar') }}?notar_id="+notar_id,
+                type: "get",
+                beforeSend: function(){
+                },
+                success: function(result){
+                    $('#notar_details').html(result);
+                }
+            });
+        }
+        $(document).ready(function(){
+            $('.steps-list .step-item ').eq(4).addClass('active')
+        });
+    </script>
+    {% endblock %}
