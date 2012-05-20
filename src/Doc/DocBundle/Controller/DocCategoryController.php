@@ -34,16 +34,12 @@ class DocCategoryController extends Controller {
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
-
-            if ($request->getMethod() == 'POST') {
-                $form->bindRequest($request);
-                if ($form->isValid()) {
-                    $data = $form->getData();
-                    $em->merge($data);
-                    $em->flush();
-                    $this->get('session')->setFlash('notice', 'Categoria a fost ADAUGATA cu success');
-                    return $this->redirect($this->generateUrl('DocDocBundle_doc_categories'));
-                }
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $em->merge($data);
+                $em->flush();
+                $this->get('session')->setFlash('notice', 'Categoria a fost ADAUGATA cu success');
+                return $this->redirect($this->generateUrl('DocDocBundle_doc_categories'));
             }
         }
         if ($this->get('request')->query->get('action')) {
