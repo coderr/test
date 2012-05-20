@@ -5,7 +5,7 @@
         <table class="ceneterd-element">
             <tr>
                 <td>
-                    <img src="uploads/documents/{{ doc.path }}" />
+                    <img src="/uploads/documents/{{ doc.path }}" />
                 </td>
                 <td class="two-cols-arrow-separator">
                     <img src="../images/icon-arrow-gray-right.png">
@@ -18,7 +18,7 @@
                                 <input type="hidden" name="session_array_id" value="{{ session_array_id }}">
                                 {% for item in langs %}
                                     <div class="select-list-item">
-                                        <div class="item-flag-en"><input type="radio" name="lang" value="{{ item.id }}" id="lang_{{ item.id }}"> <label onclick="setLangActive(this);" for="lang_{{ item.id }}">{{ item.lang_name }}</label></div>
+                                        <div class="item-flag-en"><input class="hidden" type="radio" name="lang" value="{{ item.id }}" id="lang_{{ item.id }}"> <label onclick="setLangActive(this);" for="lang_{{ item.id }}">{{ item.lang_name }}</label></div>
                                     </div>
                                 {% endfor %}
                             </form>
