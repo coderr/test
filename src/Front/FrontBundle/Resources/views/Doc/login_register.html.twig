@@ -24,24 +24,29 @@
             </form>
         </div>
         <div class="register-form">
-            <form action="" method="post">
+            <form action="{{ path('FrontFrontBundle_register') }}" method="post" id="register_form">
+                {% if app.session.hasFlash('error') %}
+                    <div class="flash-notice alert alert-success">
+                        {{ app.session.flash('error') }}
+                    </div>
+                {% endif %}
                 <h1>Inregistrare</h1>
                 <fieldset>
                     <input type="text" name="email" value="" class="rounded labeloff" placeholder="Adresa email">
                 </fieldset>
                 <fieldset>
-                    <input type="text" name="password" value="" class="rounded labeloff" placeholder="Parola">
+                    <input type="text" name="pass" value="" class="rounded labeloff" placeholder="Parola">
                 </fieldset>
                 <fieldset>
-                    <input type="text" name="cosifmpassword" value="" class="rounded labeloff" placeholder="Confirmati parola">
+                    <input type="text" name="repass" value="" class="rounded labeloff" placeholder="Confirmati parola">
                 </fieldset>
                 <fieldset>
-                    <input type="text" name="name" value="" class="rounded labeloff" placeholder="Numele si prenumele">
+                    <input type="text" name="full_name" value="" class="rounded labeloff" placeholder="Numele si prenumele">
                 </fieldset>
                 <fieldset>
                     <input type="text" name="phone" value="" class="rounded labeloff" placeholder="Numar de telefon">
                 </fieldset>
-                <input type="button" class="rounded orange-btn" value="Inregistrare">
+                <input type="button" class="rounded orange-btn" value="Inregistrare" onclick="$('#register_form').submit();">
             </form>
         </div>
     </div>
