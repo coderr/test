@@ -21,12 +21,7 @@ class User {
     /**
      * @ORM\Column(type="string", length="45")
      */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="string", length="45")
-     */
-    protected $l_name;
+    protected $full_name;
 
     /**
      * @ORM\Column(type="string", length="50")
@@ -42,6 +37,11 @@ class User {
      * @ORM\Column(type="datetime")
      */
     protected $added;
+
+    /**
+     * @ORM\Column(type="string", length="20")
+     */
+    protected $pass;
 
 
 
@@ -63,8 +63,8 @@ class User {
      *
      * @param string $notarName
      */
-    public function setName($name) {
-        $this->name = $name;
+    public function setFullName($name) {
+        $this->full_name = $name;
     }
 
     /**
@@ -72,17 +72,8 @@ class User {
      *
      * @return string 
      */
-    public function getName() {
-        return $this->name;
-    }
-
-    
-    public function setLName($l_name) {
-        $this->l_name = $l_name;
-    }
-    
-    public function getLName() {
-        return $this->l_name;
+    public function getFullName() {
+        return $this->full_name;
     }
 
     /**
@@ -121,22 +112,20 @@ class User {
         return $this->phone;
     }
 
-    /**
-     * Set added
-     *
-     * @param string $added
-     */
     public function setAdded($added) {
         $this->added = $added;
     }
 
-    /**
-     * Get phone
-     *
-     * @return string
-     */
     public function getAdded() {
         return $this->added;
+    }
+
+    public function setPass($pass) {
+        $this->pass = $pass;
+    }
+
+    public function getPass() {
+        return $this->pass;
     }
 
 }
