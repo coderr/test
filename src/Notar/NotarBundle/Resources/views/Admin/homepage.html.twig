@@ -12,6 +12,7 @@
               <input type="submit" value="Salveaza" class="btn btn-primary"/>
         </form>
     </div>
+    <div id="map_canvas" style="width: 500px; height: 300px"></div>
     <div>
         <table width="100%" class="table table-striped">
             <tr>
@@ -66,4 +67,20 @@
         </table>
     </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyAN05Xs0ppkIJ0Px87wDMEApHTcBx3sewI" type="text/javascript"></script>
+{% endblock %}
+{% block inline %}
+    $(document).ready(function(){
+        initialize();
+    })
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+        map.setUIToDefault();
+      }
+    }
 {% endblock %}
