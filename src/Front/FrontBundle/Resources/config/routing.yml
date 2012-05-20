@@ -19,6 +19,10 @@ FrontFrontBundle_step5:
     pattern:  /step5
     defaults: { _controller: FrontFrontBundle:Doc:step5 }
     
+FrontFrontBundle_login_register:
+    pattern:  /login-register
+    defaults: { _controller: FrontFrontBundle:Doc:loginRegister }
+    
 ajax:
   pattern: /ajax
   defaults: { _controller: FrontFrontBundle:Ajax:ajax }

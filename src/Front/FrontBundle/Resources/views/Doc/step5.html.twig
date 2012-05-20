@@ -12,9 +12,21 @@
             {% endfor %}
         </div>
     </div>
+    <form action="{{ path('FrontFrontBundle_step5') }}" method="post" id="fields_form">
+        <input type="hidden" name="notar_id" value="" id="notar_id">
+    </form>
     <span id="notar_details"></span>
+    <div class="rounded flash-info-green clear-all">
+        Ati ales sa traduceti Nume Document sa fie tradus din <b>Limba Sursa</b> in <b>Limba Finala</b>. Pretul pentru Doc este <b>29.99 MDL</b>
+    </div>
+    <div class="to-center top-separator">
+        <div class="div-btn standard-btn rounded hidden" id="comanda_button">
+            <a href="javascript:;" onclick="$('#fields_form').submit();" class="button tick-btn">Confirmaţi comanda</a>
+        </div>
+    </div>
     <script>
         function getNotar(notar_id, obj) {
+            $('#notar_id').val(notar_id);
             $('.select-list-items .select-list-item').removeClass('active');
             $(obj).addClass('active');
             $.ajax({
@@ -24,6 +36,7 @@
                 },
                 success: function(result){
                     $('#notar_details').html(result);
+                    $('#comanda_button').removeClass('hidden');
                 }
             });
         }

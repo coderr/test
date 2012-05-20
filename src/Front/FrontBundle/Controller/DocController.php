@@ -103,14 +103,24 @@ class DocController extends Controller {
 
     public function step5Action() {
         $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            if(is_numeric($_POST['notar_id'])) {
+                $_SESSION['notar_id'] = $_POST['notar_id'];
+                return $this->redirect($this->generateUrl('FrontFrontBundle_login_register'));
+            } else {
+                die('Wrong notar_id');
+            }
+        }
         if(empty($_SESSION['added_docs'])) {
             die('Nu ati ales nici un document, va rugam apasati "Inapoi"');
         }
         $em = $this->getDoctrine()->getEntityManager();
         $notars = $em->getRepository('NotarNotarBundle:Notar')->getNotars();
-//        Debug::d1($notars);
         
         return $this->render('FrontFrontBundle:Doc:step5.html.twig', array('notars' => $notars));
     }
 
+    public function loginRegisterAction() {
+        return $this->render('FrontFrontBundle:Doc:login_register.html.twig', array('notars' => $notars));
+    }
 }
