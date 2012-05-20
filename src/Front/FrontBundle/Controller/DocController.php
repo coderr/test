@@ -19,7 +19,7 @@ class DocController extends Controller {
     public function step1Action() {
         $em = $this->getDoctrine()->getEntityManager();
         $docs = $em->getRepository('DocDocBundle:DocCategory')->getCategoriesWithDocs();
-//        Debug::d1($doc_list_details);
+//        Debug::d1($docs);
         return $this->render('FrontFrontBundle:Doc:step1.html.twig', array('docs' => $docs));
     }
 
@@ -174,10 +174,12 @@ class DocController extends Controller {
         return $this->redirect($this->generateUrl('FrontFrontBundle_my_orders'));
     }
     
-    public function myOrdersActions() {
+    public function myOrdersAction() {
+        Debug::d1($_SESSION['added_docs']);
         if ($this->checkLogin()) {
             return $this->checkLogin();
         }
+        
         return $this->render('FrontFrontBundle:Doc:my_orders.html.twig');
     }
 
