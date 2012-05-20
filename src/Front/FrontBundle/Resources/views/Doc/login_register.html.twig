@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+{% block slider_position %}5{% endblock %}
+{% block body %}
+<div class="auth-forms">
+    <div class="rounded flash-info">Trebuie sa va logati pentru a putea comanda serviciul</div>
+    <div class="forms rounded">
+        <div class="login-form">
+            <form method="post" action="">
+                <h1>Logare</h1>
+                <fieldset>
+                    <input type="text" name="name" value="" class="rounded labeloff" placeholder="Nume">
+                </fieldset>
+                <fieldset>
+                    <input type="password" name="Password" value="" class="rounded labeloff" placeholder="Parola">
+                </fieldset>
+                <fieldset>
+                    <input type="checkbox" name="" value="" class="rounded" id="rememberme"> 
+                    <label class="text-to-center" for="rememberme">Remember me</label>
+                </fieldset>
+                <input type="button" class="rounded standard-btn" value="Logare">
+                <br />
+                <br />
+                <a href="#">Ai uitat parola?</a>
+            </form>
+        </div>
+        <div class="register-form">
+            <form action="" method="post">
+                <h1>Inregistrare</h1>
+                <fieldset>
+                    <input type="text" name="email" value="" class="rounded labeloff" placeholder="Adresa email">
+                </fieldset>
+                <fieldset>
+                    <input type="text" name="password" value="" class="rounded labeloff" placeholder="Parola">
+                </fieldset>
+                <fieldset>
+                    <input type="text" name="cosifmpassword" value="" class="rounded labeloff" placeholder="Confirmati parola">
+                </fieldset>
+                <fieldset>
+                    <input type="text" name="name" value="" class="rounded labeloff" placeholder="Numele si prenumele">
+                </fieldset>
+                <fieldset>
+                    <input type="text" name="phone" value="" class="rounded labeloff" placeholder="Numar de telefon">
+                </fieldset>
+                <input type="button" class="rounded orange-btn" value="Inregistrare">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function getNotar(notar_id, obj) {
+        $('#notar_id').val(notar_id);
+        $('.select-list-items .select-list-item').removeClass('active');
+        $(obj).addClass('active');
+        $.ajax({
+            url: "{{ path('ajax_notar') }}?notar_id="+notar_id,
+            type: "get",
+            beforeSend: function(){
+            },
+            success: function(result){
+                $('#notar_details').html(result);
+                $('#comanda_button').removeClass('hidden');
+            }
+        });
+    }
+    $(document).ready(function(){
+        $('.steps-list .step-item ').eq(4).addClass('active')
+    });
+</script>
+{% endblock %}
