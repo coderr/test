@@ -101,4 +101,16 @@ class DocController extends Controller {
         return $this->redirect($this->generateUrl('FrontFrontBundle_step5'));
     }
 
+    public function step5Action() {
+        $request = $this->getRequest();
+        if(empty($_SESSION['added_docs'])) {
+            die('Nu ati ales nici un document, va rugam apasati "Inapoi"');
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $notars = $em->getRepository('NotarNotarBundle:Notar')->getNotars();
+//        Debug::d1($notars);
+        
+        return $this->render('FrontFrontBundle:Doc:step5.html.twig', array('notars' => $notars));
+    }
+
 }
