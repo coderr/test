@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 class NotarRepository extends EntityRepository {
 
     protected $notar_id;
-
+    
     /**
      * gets the list of reposiotries
      */
@@ -25,7 +25,7 @@ class NotarRepository extends EntityRepository {
         $this->notar_id = $notar_id;
         return $this;
     }
-
+    
     public function deleteNotar() {
         $q = $this->createQueryBuilder('n')
                         ->delete()
