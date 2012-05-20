@@ -22,3 +22,7 @@ FrontFrontBundle_step5:
 ajax:
   pattern: /ajax
   defaults: { _controller: FrontFrontBundle:Ajax:ajax }
+    
+ajax_notar:
+  pattern: /ajax_notar
+  defaults: { _controller: FrontFrontBundle:Ajax:ajaxNotar }
