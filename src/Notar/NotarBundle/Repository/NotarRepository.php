@@ -45,4 +45,11 @@ class NotarRepository extends EntityRepository {
         return $q->getQuery()->getSingleResult();
     }
 
+    public function getRandomNotar() {
+        $q = $this->createQueryBuilder('n')
+                        ->select('n')
+        ;
+        return $q->getQuery()->getSingleResult();
+    }
+
 }
