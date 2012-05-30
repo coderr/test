@@ -4,6 +4,8 @@ namespace Doc\DocBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Notar\NotarBundle\Additional\Debug;
+use Doc\DocBundle\Entity\UserDoc;
+use User\UserBundle\Entity\User;
 
 class UserDocRepository extends EntityRepository {
 
@@ -44,10 +46,23 @@ class UserDocRepository extends EntityRepository {
     }
     
     public function storeSessionUserDoc($doc, $notar_id, $user_id) {
-        Debug::d1($doc);
-        Debug::d1($_SESSION['added_docs']);
-        $user_doc = new UserDoc();
-        $user_doc->setUserId();
+        reset($doc);
+//        Debug::d1($doc);
+        $doc_obj = current($doc);
+        
+        $user = new User()
+        $user->set
+        
+        $query = '
+            INSERT INTO user_doc(doc_id, user_id, notar_id, lang_id, added)
+            VALUE('.$doc_obj->getId().', '.$user_id.', '.$notar_id.', '.$doc['to_lang'].', NOW())
+        ';
+        $q = $this->getEntityManager()->getConnection();
+        $return = $q->executeUpdate($query);
+        var_dump($return->lastInsertId());die;
+        
+        Debug::d1($q);
+        
     }
 
 }

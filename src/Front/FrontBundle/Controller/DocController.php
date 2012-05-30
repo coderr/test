@@ -182,17 +182,25 @@ class DocController extends Controller {
     }
     
     public function myOrdersAction() {
+        $query = '
+            INSERT INTO user_doc(doc_id, user_id, notar_id, lang_id, added)
+            VALUE(2, 1, 1, 3, NOW())
+        ';
+        $q = $this->getDoctrine()->getConnection();
+        $return = $q->executeUpdate($query);
+        var_dump($return->lastInsertId());die;
+        die('adsf');
+        
         if ($this->checkLogin()) {
             return $this->checkLogin();
         }
+        $notar_id = $_SESSION['notar_id'];
         $session = $this->getRequest()->getSession();
         $em = $this->getDoctrine()->getEntityManager();
         if(!empty($_SESSION['added_docs'])) {
             foreach($_SESSION['added_docs'] as $key) {
                 $notars = $em->getRepository('DocDocBundle:UserDoc')->storeSessionUserDoc($key, $notar_id, $session->get('user_id'));
             }
-            $user_doc = new UserDoc();
-            $user_doc->setUserId();
         }
         Debug::d1($_SESSION['added_docs']);
         

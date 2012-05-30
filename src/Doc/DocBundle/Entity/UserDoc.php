@@ -5,7 +5,7 @@ namespace Doc\DocBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="UserDoc\UserDocBundle\Repository\UserDocRepository")
+ * @ORM\Entity(repositoryClass="Doc\DocBundle\Repository\UserDocRepository")
  * @ORM\Table(name="user_doc")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -73,6 +73,14 @@ class UserDoc {
 
     public function getNotarId() {
         return $this->notar_id;
+    }
+
+    public function setLangId($lang_id) {
+        $this->lang_id = $lang_id;
+    }
+
+    public function getLangId() {
+        return $this->lang_id;
     }
 
     public function setAdded($added) {

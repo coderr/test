@@ -1,7 +1,13 @@
 {% extends '::admin_base.html.twig' %}
 {% block body %}
+<style>
+    #map_canvas{
+        width: 500px;
+        height: 300px;
+    }
+</style>
 <div class="center_div">
-    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();">Adauga notar</a>
+    <a href="javascript:;" class="add_button" onclick="$('#add_form').toggle();initialize();">Adauga notar</a>
     <div id="add_form" class="{% if not edit %}add_hidden{% endif %}">
         <form action="{{ path('NotarNotarBunde_admin_homepage') }}" method="post" {{ form_enctype(form) }}>
               {{ form_widget(form) }}
@@ -11,8 +17,8 @@
               {{ form_rest(form) }}
               <input type="submit" value="Salveaza" class="btn btn-primary"/>
         </form>
+        <div id="map_canvas"></div>
     </div>
-    <div id="map_canvas" style="width: 500px; height: 300px"></div>
     <div>
         <table width="100%" class="table table-striped">
             <tr>
@@ -70,17 +76,38 @@
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
-    <script src="//maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyAN05Xs0ppkIJ0Px87wDMEApHTcBx3sewI" type="text/javascript"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
 {% endblock %}
 {% block inline %}
-    $(document).ready(function(){
-        initialize();
-    })
     function initialize() {
-      if (GBrowserIsCompatible()) {
-        var map = new GMap2(document.getElementById("map_canvas"));
-        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-        map.setUIToDefault();
-      }
+        var myLatlng = new google.maps.LatLng(46.94043270,28.95890960);
+        var myOptions = {
+        zoom: 4,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        var nePoint = new google.maps.LatLng(46.94043270, 28.95890960);
+        var swPoint = new google.maps.LatLng(46.92553860, 28.89889790);
+
+        var bounds = new google.maps.LatLngBounds(swPoint, nePoint);
+
+        //var currentBounds = Map.map.getBounds();
+
+        map.fitBounds(bounds);
+
+        var marker = new google.maps.Marker({
+            position: map.getCenter(), 
+            map: map,
+            title:"",
+            draggable: true
+        });
+        google.maps.event.addListener(marker, "dragend", function(event) {
+            var point = marker.getPosition();
+            map.panTo(point);
+            $('#notar_notar_lat').val(event.latLng.lat());
+            $('#notar_notar_long').val(event.latLng.lng());
+        });
     }
 {% endblock %}
