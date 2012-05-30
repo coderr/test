@@ -3,6 +3,7 @@
 namespace Doc\DocBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Notar\NotarBundle\Additional\Debug;
 
 class UserDocRepository extends EntityRepository {
 
@@ -43,7 +44,10 @@ class UserDocRepository extends EntityRepository {
     }
     
     public function storeSessionUserDoc($doc, $notar_id, $user_id) {
-        
+        Debug::d1($doc);
+        Debug::d1($_SESSION['added_docs']);
+        $user_doc = new UserDoc();
+        $user_doc->setUserId();
     }
 
 }
