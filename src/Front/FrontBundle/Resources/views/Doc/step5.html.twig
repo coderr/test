@@ -6,16 +6,38 @@
         <div class="select-list-title rounded">Alegeti notarul pentru ridicarea actului</div>
         <div class="select-list-items">
             {% for item in notars %}
-                <div class="select-list-item" onclick="getNotar({{ item.id }}, this)">
-                    {{ item.notarname }}
-                </div>
+            <div class="select-list-item" onclick="window.location = '?notar_id={{ item.id }}';return false;getNotar({{ item.id }}, this)">
+                {{ item.notarname }}
+            </div>
             {% endfor %}
         </div>
     </div>
     <form action="{{ path('FrontFrontBundle_step5') }}" method="post" id="fields_form">
-        <input type="hidden" name="notar_id" value="" id="notar_id">
+        <input type="hidden" name="notar_id" value="{{ notar.id }}" id="notar_id">
     </form>
-    <span id="notar_details"></span>
+    <span id="notar_details">
+        <div class="notar-address-s1 rounded">
+            <h1>{{ notar.notarname }}</h1>
+            <div class="notar-address">
+                <b>Address:</b>{{ notar.notaraddress }}
+                <br />
+                <b>Telephone:</b>{{ notar.phone }}
+                <br />
+                <b>FAX:</b>
+                <br />
+                <b>Email:</b>{{ notar.email }}
+                <br />
+            </div>
+            <div class="rounded flash-info flash-icon-info">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text. 				
+            </div>
+            <h1>Google Map</h1>
+            <div class="gmap-address">
+                <div id="map_canvas"></div>
+            </div>
+        </div>
+    </span>
+    <div style="height:10px"></div>
     <div class="rounded flash-info-green clear-all">
         Ati ales sa traduceti Nume Document sa fie tradus din <b>Limba Sursa</b> in <b>Limba Finala</b>. Pretul pentru Doc este <b>29.99 MDL</b>
     </div>
@@ -25,24 +47,72 @@
         </div>
     </div>
 </div>
-    <script>
-        function getNotar(notar_id, obj) {
-            $('#notar_id').val(notar_id);
-            $('.select-list-items .select-list-item').removeClass('active');
-            $(obj).addClass('active');
-            $.ajax({
-                url: "{{ path('ajax_notar') }}?notar_id="+notar_id,
-                type: "get",
-                beforeSend: function(){
-                },
-                success: function(result){
-                    $('#notar_details').html(result);
-                    $('#comanda_button').removeClass('hidden');
-                }
-            });
-        }
-        $(document).ready(function(){
-            $('.steps-list .step-item ').eq(4).addClass('active')
+<script>
+    function getNotar(notar_id, obj) {
+        $('#notar_id').val(notar_id);
+        $('.select-list-items .select-list-item').removeClass('active');
+        $(obj).addClass('active');
+        $.ajax({
+            url: "{{ path('ajax_notar') }}?notar_id="+notar_id,
+            type: "get",
+            beforeSend: function(){
+            },
+            success: function(result){
+                $('#notar_details').html(result);
+                $('#comanda_button').removeClass('hidden');
+            }
         });
-    </script>
-    {% endblock %}
+    }
+    $(document).ready(function(){
+        $('.steps-list .step-item ').eq(4).addClass('active')
+    });
+</script>
+<style>
+    #map_canvas{
+        width: 500px;
+        height: 300px;
+    }
+</style>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script>
+    function initialize() {
+        var myLatlng = new google.maps.LatLng(46.94043270,28.95890960);
+        var myOptions = {
+            zoom: 4,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        var nePoint = new google.maps.LatLng(46.94043270, 28.95890960);
+        var swPoint = new google.maps.LatLng(46.92553860, 28.89889790);
+
+        var bounds = new google.maps.LatLngBounds(swPoint, nePoint);
+
+        //var currentBounds = Map.map.getBounds();
+
+        map.fitBounds(bounds);
+
+        var notar_position = new google.maps.LatLng({{ notar.notarlat }}, {{ notar.notarlong }});
+
+        var marker = new google.maps.Marker({
+            position: notar_position, 
+            map: map,
+            title:"",
+            draggable: true
+        });
+        var point = marker.getPosition();
+        map.panTo(point);
+        google.maps.event.addListener(marker, "dragend", function(event) {
+            var point = marker.getPosition();
+            map.panTo(point);
+            $('#notar_notar_lat').val(event.latLng.lat());
+            $('#notar_notar_long').val(event.latLng.lng());
+        });
+    }
+    $(document).ready(function(){
+        initialize();
+    })
+</script>
+{% endblock %}

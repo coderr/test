@@ -112,6 +112,12 @@ class DocController extends Controller {
 
     public function step5Action() {
         $request = $this->getRequest();
+        $notar_id = @$_GET['notar_id'];
+        if(is_numeric($notar_id)) {
+            $notar_details = $this->getDoctrine()->getRepository('NotarNotarBundle:Notar')->setNotarId($notar_id)->getNotar();
+        } else {
+            $notar_details = $this->getDoctrine()->getRepository('NotarNotarBundle:Notar')->getRandomNotar();
+        }
         if ($request->getMethod() == 'POST') {
             if (is_numeric($_POST['notar_id'])) {
                 $_SESSION['notar_id'] = $_POST['notar_id'];
@@ -126,7 +132,7 @@ class DocController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $notars = $em->getRepository('NotarNotarBundle:Notar')->getNotars();
 
-        return $this->render('FrontFrontBundle:Doc:step5.html.twig', array('notars' => $notars));
+        return $this->render('FrontFrontBundle:Doc:step5.html.twig', array('notars' => $notars, 'notar' => $notar_details));
     }
 
     public function loginRegisterAction() {
