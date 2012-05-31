@@ -5,19 +5,19 @@
     <div class="rounded flash-info">Trebuie sa va logati pentru a putea comanda serviciul</div>
     <div class="forms rounded">
         <div class="login-form">
-            <form method="post" action="">
+            <form method="post" action="{{ path('FrontFrontBundle_login') }}" id="login_form">
                 <h1>Logare</h1>
                 <fieldset>
                     <input type="text" name="name" value="" class="rounded labeloff" placeholder="Nume">
                 </fieldset>
                 <fieldset>
-                    <input type="password" name="Password" value="" class="rounded labeloff" placeholder="Parola">
+                    <input type="password" name="pass" value="" class="rounded labeloff" placeholder="Parola">
                 </fieldset>
                 <fieldset>
                     <input type="checkbox" name="" value="" class="rounded" id="rememberme"> 
                     <label class="text-to-center" for="rememberme">Remember me</label>
                 </fieldset>
-                <input type="button" class="rounded standard-btn" value="Logare">
+                <input type="button" class="rounded standard-btn" value="Logare" onclick="$('#login_form').submit();">
                 <br />
                 <br />
                 <a href="#">Ai uitat parola?</a>
