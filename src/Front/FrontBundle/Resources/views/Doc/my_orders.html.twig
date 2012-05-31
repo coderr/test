@@ -3,30 +3,59 @@
 {% block body %}
 <div class="settings-pg padding-sepataor">
     <h1>Lista de comenzi</h1>
-    <table class="my_orders" width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-            <th>
-                sdf
-            </th>
-            <th>
-                sdf
-            </th>
-            <th>
-                sdf
-            </th>
-        </tr>
-        <tr>
-            <td>
-                sdf
-            </td>
-            <td>
-                sdf
-            </td>
-            <td>
-                sdf
-            </td>
-        </tr>
-    </table>
+    <form action="" method="post" id="user_docs_form">
+        <table class="my_orders" width="100%" cellpadding="0" cellspacing="0">
+            <tr style="background-color: #F7F7F7">
+                <th align="left">
+                    Actul
+                </th>
+                <th align="center">
+                    Pretul comenzii
+                </th>
+                <th width="137" align="center">
+                    Statutul comenzii
+                </th>
+            </tr>
+            {% for i, item in user_docs %}
+                <tr class="{{ cycle(['odd', 'even'], i) }}">
+                    <td>
+                        <input type="checkbox" value="{{ item.id }}" name="user_docs[]">
+                        <img src="uploads/documents/th_{{ item.path }}">
+                        {{ item.doc_name_ro }}
+                    </td>
+                    <td align="center">
+                        {{ item.price }} lei
+                    </td>
+                    <td align="center">
+                        {% if(item.is_sent) %}
+                            Trimis
+                        {% else %}
+                            Salvat
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td align="right" colspan="3" style="padding:10px;">
+                    Total Comanda: <b>{{ user_docs.0.sum_price }} Lei</b>
+                    <div class="rounded flash-info">
+                        random text
+                    </div>
+                    <div style="text-align: left;margin:5px;">
+                        <input type="button" onclick="$('#todo').val('delete');$('#user_docs_form').submit();" value="Sterge" class="rounded standard-btn">&nbsp;&nbsp;
+<!--                        <input type="button" onclick="$('#todo').val('edit');$('#user_docs_form').submit();" value="Editeaza" class="rounded standard-btn">&nbsp;&nbsp;-->
+                        <input type="button" onclick="$('#todo').val('send');$('#user_docs_form').submit();" value="Confirma si trimite" class="rounded standard-btn">&nbsp;&nbsp;
+                        <div style="float: right">
+                            <input type="button" onclick="$('#todo').val('save');$('#user_docs_form').submit();" value="Salvati" class="rounded orange-btn">
+                        </div>
+                    </div>
+
+
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" value="" name="todo" id="todo">
+    </form>
 </div>
 <script>
     
