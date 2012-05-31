@@ -728,10 +728,20 @@ label.toggled
 	width: 560px;
 }
 .my_orders td{
-    border-top:1px solid #D2D2D2;
+/*    border-top:1px solid #D2D2D2;*/
     border-bottom:1px solid #D2D2D2;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .my_orders th{
     border-top:1px solid #D2D2D2;
+    border-bottom:1px solid #D2D2D2;
     padding: 12px;
+}
+.my_orders{
+    border-right:1px solid #D2D2D2;
+    border-left:1px solid #D2D2D2;
+}
+.my_orders .even{
+    background-color: #F7F7F7;
 }
