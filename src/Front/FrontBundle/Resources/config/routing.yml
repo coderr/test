@@ -1,3 +1,11 @@
+FrontFrontBundle_homepage:
+    pattern:  /
+    defaults: { _controller: FrontFrontBundle:Doc:homepage }
+    
+FrontFrontBundle_cum_lucreaza:
+    pattern:  /how-it-works
+    defaults: { _controller: FrontFrontBundle:Doc:howItWorks }
+    
 FrontFrontBundle_step1:
     pattern:  /step1
     defaults: { _controller: FrontFrontBundle:Doc:step1 }
@@ -9,7 +17,6 @@ FrontFrontBundle_step2:
 FrontFrontBundle_step3:
     pattern:  /step3
     defaults: { _controller: FrontFrontBundle:Doc:step3 }
-    
     
 FrontFrontBundle_step4:
     pattern:  /step4
