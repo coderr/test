@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+{% block slider %}
+{% block slider_position %}{% endblock %}
+{% endblock %}
+{% block body %}
+    <div class="documnets-by-category" style="border: none;padding-top:40px;height: inherit;">
+        <div class="how_works_bordered" style="padding-left: 91px;padding-top:31px;padding-right: 91px;">
+            <img src="/images/image1.png">
+            <div style="float:right;width:347px;">
+                <div style="font-size: 25px;margin-top:40px;">Alegeti tipul documentului spre traducere</div>
+                <div style="font-size: 14px;margin-top:10px;color:#8F8F8F;margin-top:26px;">Selectati din lista de categorii unul sau mai multe acte pentru care doriti sa efectuati traducere si legalizare. Este important sa alegeti documentul in limba originala.</div>
+            </div>
+        </div>
+        <div style="height:20px;"></div>
+        <div class="how_works_bordered" style="padding-left: 91px;padding-top:31px;padding-right: 91px;">
+            <div style="height:262px;">
+                <div style="float:left;width:347px;">
+                    <div style="font-size: 25px;margin-top:73px;">Alegeti limba de traducere</div>
+                    <div style="font-size: 14px;margin-top:10px;color:#8F8F8F;margin-top:26px;">Alegeti una din limbile tinta disponibile, in dependenta de actul selectat.</div>
+                </div>
+                <img src="/images/image2.png" style="float:right;">
+            </div>
+        </div>
+        <div style="height:20px;"></div>
+        <div class="how_works_bordered" style="padding-left: 91px;padding-top:31px;padding-right: 91px;padding-bottom:40px;">
+            <img src="/images/image3.png">
+            <div style="float:right;width:347px;">
+                <div style="font-size: 25px;margin-top:40px;">Completati campurile cu datele dumneavoastra</div>
+                <div style="font-size: 14px;margin-top:10px;color:#8F8F8F;margin-top:26px;">In dreptul fiecarui act este necesar sa completati cimpurile libere.<br />Acestea vor fi introduse in documentul tradus.<br />Este important ca datele sa fie corecte.</div>
+            </div>
+        </div>
+        <div style="height:20px;"></div>
+        <div class="how_works_bordered" style="padding-left: 91px;padding-top:60px;padding-right: 91px;">
+            <div style="height:249px;">
+                <div style="float:left;width:347px;">
+                    <div style="font-size: 25px;margin-top:13px;">Priviti o vizualizare a documentului</div>
+                    <div style="font-size: 14px;margin-top:10px;color:#8F8F8F;margin-top:26px;">La aceasta etapa aveti posibilitatea de a vedea toate datele selectate. Dupa verificare puteti alege pasul urmator sau editarea comenzii.</div>
+                </div>
+                <img src="/images/image4.png" style="float:right;">
+            </div>
+        </div>
+        <div style="height:20px;"></div>
+        <div class="how_works_bordered" style="padding-left: 91px;padding-top:59px;padding-right: 91px;padding-bottom:74px;">
+            <img src="/images/image5.png">
+            <div style="float:right;width:347px;">
+                <div style="font-size: 25px;margin-top:40px;">Selectati notarul dorit si primiti instructiunile finale</div>
+                <div style="font-size: 14px;margin-top:10px;color:#8F8F8F;margin-top:26px;">Aici vor fi descrise toate detaliile comenzii Dvs. dupa care, alegeti notarul de unde doriti sa colectati traducerile legalizate.</div>
+            </div>
+        </div>
+        <div style="text-align: center;margin-top:40px;margin-bottom:20px;">
+            <input type="button" value="Comanda acum" class="orange-btn rounded" onclick="window.location='{{ path('FrontFrontBundle_step1') }}'" style="height:49px;width:207px;">
+        </div>
+    </div>
+{% endblock %}
