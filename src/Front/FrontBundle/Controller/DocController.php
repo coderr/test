@@ -206,5 +206,13 @@ class DocController extends Controller {
         
         return $this->render('FrontFrontBundle:Doc:my_orders.html.twig');
     }
+    
+    public function homepageAction() {
+        return $this->render('FrontFrontBundle:Doc:homepage.html.twig');
+    }
+    
+    public function howItWorksAction() {
+        return $this->render('FrontFrontBundle:Doc:how_it_works.html.twig');
+    }
 
 }
