@@ -22,14 +22,14 @@ a:hover
 {
     text-decoration: underline;
 }
-header,
+.header,
 footer,
 nav
 {
     display: block;
     position: relative;
 }
-header
+.header
 {
     background-image: url("../images/header-bg.gif");
     background-position: center bottom;
@@ -37,7 +37,7 @@ header
     height: 105px;
     padding-bottom: 5px;
 }
-header nav
+.header nav
 {
     display: inline-block;
     height: 60px;
@@ -52,7 +52,7 @@ footer nav
     display: inline-block;
     line-height: 24px;
 }
-header nav a,
+.header nav a,
 footer nav a
 {
     border-right: 1px solid #C6C6C6;
@@ -63,13 +63,13 @@ footer nav a:first-child
 {
 	padding-left:0px;
 }
-header nav a:last-child,
+.header nav a:last-child,
 footer nav a:last-child
 {
     border-right: 0 none;
     padding-right: 0;
 }
-header nav a.active,
+.header nav a.active,
 footer nav a.active
 {
 	color: #f26d04;
@@ -744,4 +744,71 @@ label.toggled
 }
 .my_orders .even{
     background-color: #F7F7F7;
+}
+.homepage_image{
+    background-image: url(../images/picture.png);
+    height: 346px;
+    background-repeat: no-repeat;
+    background-position: 100%;
+    float:right;
+    width:652px;
+}
+.homepage_big_text{
+    font-size: 45px;
+    color: #000;
+    font-family: arial;
+    white-space: nowrap;
+    padding-top: 80px;
+}
+.homepage_grey{
+    color:#AEAEAE;
+    font-size: 14px;
+    padding-top: 40px;
+}
+.homepage_buttons{
+    font-size: 12px;
+    text-transform: uppercase;
+    border:3px solid #E5E5E5;
+    border-radius: 30px;
+    padding:12px;
+    text-decoration: none !important;
+    color: #000;
+    font-weight: bold;
+}
+.homepage_buttons:hover{
+    border:3px solid #FF9700;
+}
+.homepage_bottom_list{
+    width: 220px;
+    float:left;
+    border: 1px solid #E5E5E5;
+    border-radius: 3px;
+    text-align: center;
+    padding-top: 11px;
+    height: 168px;
+    margin-right: 17px;
+}
+.homepage_bottom_list .list_title{
+    text-align: center;
+    font-size: 14px;
+    height: 28px;
+    padding-top: 7px;
+}
+.how_works_bordered{
+    border-radius: 3px;
+    border: 1px solid #E5E5E5;
+/*    height: 312px;*/
+}
+.login_popup{
+    position: absolute;
+    width:175px;
+    height: 141px;
+    border:1px solid #C5C5C5;
+    border-radius: 3px;
+    background-color: #FFF;
+    top: 69px;
+    right: 494px;
+    z-index: 8000;
+    text-align: center;
+    display:none;
 }
