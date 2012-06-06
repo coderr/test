@@ -1,15 +1,24 @@
-_welcome:
-    pattern:  /
-    defaults: { _controller: AcmeDemoBundle:Welcome:index }
+FrontFrontBundle:
+    resource: "@FrontFrontBundle/Resources/config/routing.yml"
+    prefix:   /
 
-_demo_secured:
-    resource: "@AcmeDemoBundle/Controller/SecuredController.php"
-    type:     annotation
+DocDocBundle:
+    resource: "@DocDocBundle/Resources/config/routing.yml"
+    prefix:   /
 
-_demo:
-    resource: "@AcmeDemoBundle/Controller/DemoController.php"
-    type:     annotation
-    prefix:   /demo
+NotarNotarBundle:
+    resource: "@NotarNotarBundle/Resources/config/routing.yml"
+    prefix:   /
+
+UserUserBundle:
+    resource: "@UserUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal
+
 
 _assetic:
     resource: .
