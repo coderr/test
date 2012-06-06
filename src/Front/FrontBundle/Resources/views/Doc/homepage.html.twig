@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+{% block slider %}
+{% block slider_position %}{% endblock %}
+{% endblock %}
+{% block body %}
+    <div class="documnets-by-category" style="border: none;height:348px;">
+        <div class="homepage_image"></div>
+        <div class="homepage_big_text">
+            Bine ati venit la ENOTAR
+            <div class="homepage_grey">Text</div>
+            <div class="buttons" style="padding-top:20px;">
+                <a href="{{ path('FrontFrontBundle_login_register') }}" class="homepage_buttons">inregistrare</a>
+                <a href="{{ path('FrontFrontBundle_cum_lucreaza') }}" class="homepage_buttons">vezi cum lucreaza</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block line %}<div style="border:1px solid #E5E5E5"></div>{% endblock %}
+{% block rest %}
+    <div class="centered" style="padding-top:40px;">
+        <div class="homepage_bottom_list">
+            <img style="border: 1px solid #E5E5E5;" src="/images/cum_lucreaza.png">
+            <div class="list_title">Cum Lucreaza</div>
+        </div>
+        <div class="homepage_bottom_list">
+            <img style="border: 1px solid #E5E5E5;" src="/images/cum_lucreaza.png">
+            <div class="list_title">Servicii</div>
+        </div>
+        <div class="homepage_bottom_list">
+            <img style="border: 1px solid #E5E5E5;" src="/images/cum_lucreaza.png">
+            <div class="list_title">Oferte</div>
+        </div>
+        <div class="homepage_bottom_list">
+            <img style="border: 1px solid #E5E5E5;" src="/images/cum_lucreaza.png">
+            <div class="list_title">Despre Noi</div>
+        </div>
+    </div>
+{% endblock %}
